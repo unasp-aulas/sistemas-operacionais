@@ -176,10 +176,6 @@ Os resgistradores são importantes por causa da <mark>multiplexação de tempo d
 :::
 ::::
 
-##
-
-\
-
 ## Memória
 
 :::: {.columns}
