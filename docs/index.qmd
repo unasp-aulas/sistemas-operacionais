@@ -1,0 +1,250 @@
+---
+title: "Sistemas Operacionais"
+author: "Thiago Pires"
+title-slide-attributes:
+  data-background-image: cover.gif
+  data-background-position: cover
+format: 
+  revealjs:
+    theme: theme.scss
+    width: 1600
+    height: 900
+    footer: "[github.com/unasp-aulas/sistemas-operacionais](https://github.com/unasp-aulas/sistemas-operacionais)"
+html-math-method: mathjax
+code-annotations: below
+self-contained: true
+---
+
+# Fundamentos de Sistemas Operacionais
+
+\
+
+> <mark>A função do [sistema operacional]{.blue} é fornecer aos programas do usuário um modelo do computador melhor</mark>, mais simples e mais limpo, assim como lidar com o gerenciamento de todos os recursos mencionados. *A maioria dos computadores tem dois modos de operação: [modo núcleo e modo usuário.]{.blue}*
+
+## Fundamentos de Sistemas Operacionais
+
+:::: columns
+::: {.column width="40%"}
+
+\
+
+O sistema operacional opera em [modo núcleo]{.blue} (também chamado modo supervisor). Nesse modo, <mark>ele tem acesso completo a todo o hardware e *pode executar qualquer instrução</mark> que a máquina for capaz de executar.*
+:::
+::: {.column width="60%"}
+
+\
+
+Observe, na figura a seguir, uma visão geral simplificada dos [principais componentes]{.blue}:
+
+![](images/image-01.png)
+:::
+::::
+
+## Fundamentos de Sistemas Operacionais
+
+\
+
+:::: columns
+::: {.column width="33%" .fragment fragment-index=1}
+O resto do software opera em [modo usuário]{.blue}, no qual apenas um subconjunto das instruções da máquina está disponível.
+:::
+::: {.column width="33%" .fragment fragment-index=2}
+A diferença entre os [modos]{.blue} exerce papel crucial na maneira como os sistemas operacionais funcionam.
+:::
+::: {.column width="33%" .fragment fragment-index=3}
+<mark>Os sistemas operacionais são enormes, complexos</mark> e têm vida longa. O código-fonte do coração de um sistema operacional como Linux ou Windows tem cerca de cinco milhões de linhas.
+:::
+::::
+
+## O que é um sistema operacional?
+
+\
+
+> *Os sistemas operacionais realizam <mark>duas funções essencialmente não relacionadas</mark>: [(1) fornecer a programadores de aplicativos (e programas aplicativos, claro) um conjunto de recursos abstratos limpo em vez de recursos confusos de hardware, e]{.fragment fragment-index=2  .semi-fade-out} [(2) gerenciar esses recursos de hardware]{.fragment fragment-index=2}*
+
+## O que é um sistema operacional? 
+
+\
+
+:::: columns
+::: {.column width="30%"}
+> *Sistemas operacionais transformam o <mark>feio em belo</mark>, como mostrado na figura:*
+:::
+::: {.column width="70%"}
+![](images/image-02.png){width="80%"}
+:::
+::::
+
+[Usando essa [abstração]{.blue}, os programas podem criar, escrever, ler arquivos, sem ter que lidar com detalhes complexos de como o hardware funciona]{.fragment}
+
+## O que é um sistema operacional? 
+
+\
+
+> *[O conceito de um sistema operacional como fundamentalmente <mark>fornecendo abstrações</mark> para programas aplicativos é uma visão top-down (abstração de cima para baixo).]{.fragment fragment-index=2 .semi-fade-out} [Uma visão alternativa, bottom-up (abstração de baixo para cima), sustenta que o sistema operacional está ali para <mark>gerenciar todas as partes de um sistema complexo</mark>.]{.fragment fragment-index=2}*
+
+## O que é um sistema operacional? 
+
+\
+
+:::: columns
+::: {.column width="30%"}
+O gerenciamento de recursos inclui a [multiplexação]{.blue} (compartilhamento) de recursos de duas maneiras diferentes: <mark>no tempo e no espaço</mark>. 
+:::
+::: {.column width="70%"}
+::: {.fragment fragment-index=2 .semi-fade-out}
+- Quando um recurso é <mark>multiplexado no tempo</mark>, diferentes programas ou usuários se revezam usando-o.
+:::
+::: {.fragment fragment-index=2}
+- O outro tipo é a <mark>multiplexação de espaço</mark>. Em vez de os clientes se revezarem, cada um tem direito a uma parte do recurso.
+:::
+:::
+::::
+
+## O que é um sistema operacional? 
+
+\
+
+1. *Quando múltiplas saídas de impressão estão na fila para serem impressas em uma única impressora, uma decisão tem de ser tomada sobre qual deve ser impressa em seguida.*
+
+::: {.fragment}
+ [Multiplexado no tempo]{.blue}
+:::
+
+2. *Em vez de os clientes se revezarem, cada um tem direito a uma parte do recurso. Por exemplo, a memória principal é normalmente dividida entre vários programas sendo executados, de modo que cada um pode ser residente ao mesmo tempo (por exemplo, a fim de se revezar usando a CPU).*
+
+::: {.fragment}
+ [Multiplexado no espaço]{.blue}
+:::
+
+## Revisão sobre hardware de computadores
+
+\
+
+:::: columns
+::: {.column width="30%"}
+> *Um sistema operacional está intimamente ligado ao hardware do computador no qual ele é executado*
+:::
+::: {.column width="70%"}
+![](images/image-06.png)
+:::
+::::
+
+\
+
+A CPU, memória e dispositivos de E/S estão todos conectados por um <mark>sistema de barramento (*bus*)</mark> e comunicam-se uns com os outros sobre ele.
+
+## Revisão sobre hardware de computadores
+
+\
+
+### Processadores
+
+> *O "cérebro" do computador é a CPU. O ciclo básico de toda CPU é buscar a primeira instrução da memória, decodificá-la para determinar o seu tipo e operandos, executá-la.*
+
+\
+
+:::: columns
+::: {.column width="33%" .fragment}
+<mark>Cada CPU tem um conjunto específico de instruções</mark> que ela consegue executar. *Desse modo, um processador x86 não pode executar programas ARM.*
+
+:::
+::: {.column width="33%" .fragment}
+As CPUs têm alguns
+[registradores]{.blue} internos para armazenamento de variáveis
+e resultados temporários.
+:::
+::: {.column width="33%" .fragment}
+Os resgistradores são importantes por causa da <mark>multiplexação de tempo da CPU.</mark>
+:::
+::::
+
+## Revisão sobre hardware de computadores
+
+\
+
+:::: columns
+::: {.column width="30%"}
+### Memória 
+> *É o segundo principal componente em qualquer computador, o qual deve ser rápido ao extremo (mais rápida do que executar uma instrução, de maneira que a CPU não seja atrasada pela memória).*
+:::
+::: {.column width="70%"}
+
+\
+
+![](images/image-09.png)
+:::
+::::
+
+##
+
+\
+
+## Memória
+
+:::: {.columns}
+::: {.column width="25%" .fragment}
+A camada superior consiste em [registradores internos]{.blue} à CPU. Eles são feitos do mesmo material que a CPU e são, desse modo, tão rápidos quanto ela
+:::
+::: {.column width="25%" .fragment}
+[Memória cache]{.blue} é uma parte da CPU. Atua como memória temporária para que seja recuperado rapidamente os dados, sem a necessidade de uma busca direta na memória principal
+:::
+::: {.column width="25%" .fragment}
+[Mémoria principal]{.blue} tem por finalidade o armazenamento de instruções e dados de programas que serão ou estão sendo executados pela CPU.
+:::
+::: {.column width="25%" .fragment}
+[Discos magnéticos]{.blue} são um tipo de memória não volátil de grande capacidade de armazenamento, usada para guardar informações (instruções e dados de programas) que não serão imediatamente usadas pela CPU.
+:::
+::::
+
+## Exemplo de utilização de cache
+
+\
+
+:::: columns
+::: {.column width="30%" .fragment}
+[DuckDB]{.blue} tem uma forma de consulta (*vectorized or just-in-time query execution engines*) que <mark>são processadas em lotes de dados que consistem em coleções de vetores</mark>, cada um contendo uma quantidade fixa de valores das colunas.
+:::
+
+::: {.column width="30%" .fragment}
+O resultado é um uso eficiente das operações no cache, <mark>mantendo os dados nas consultas tanto quanto possível no [cache L1 e L2]{.blue}</mark> muito rápido.
+:::
+::: {.column width="40%" .fragment}
+![Fonte: [blog.min.io/duckdb-and-minio-for-a-modern-data-stack/](https://blog.min.io/duckdb-and-minio-for-a-modern-data-stack/)](images/caches.jpeg)
+:::
+::::
+
+## O zoológico dos sistemas operacionais
+
+- Sistemas operacionais de computadores de grande porte, <mark>de alto desempenho e alta disponibilidade</mark> (*mainframes*)
+- Sistemas operacionais de servidores
+- Sistemas operacionais de computadores pessoais
+- Sistemas operacionais de computadores portáteis
+- Sistemas operacionais embarcados
+- Sistemas operacionais de tempo real
+
+## Conceitos de sistemas operacionais
+
+- [**Processos:**]{.blue} <mark>um processo é basicamente um [programa em execução]{.blue}</mark> e associado a cada processo está um [espaço de endereçamento]{.blue}, uma lista de posições de mémoria que vai de 0 a algum máximo, onde o processo pode ler e escrever.
+- [**Espaços de endereçamento:**]{.blue} diz respeito ao gerenciamento e à <mark>proteção da memória principal do computador</mark>, quando se tem multiplos processos sendo executados.
+- [**Arquivos:**]{.blue} um sistema de arquivos é uma estrutura usada por um sistema operacional para organizar e gerenciar arquivos em um dispositivo de armazenamento. <mark>Chamadas do sistemas são necessárias para criar, remover, ler escrever arquivos.</mark> Existe o conceito de [diretório]{.blue} como uma maneira de agrupar os arquivos
+
+## Conceitos de sistemas operacionais
+
+- [**Entrada/Saída:**]{.blue} o sistema operacional tem um subsistema de E/S para <mark>gerenciamento dos dispositivos</mark>.
+- [**Proteção:**]{.blue} o sistema operacional <mark>gerencia a segurança
+do sistema</mark> de maneira que os arquivos, por exemplo,
+sejam acessíveis somente por usuários autorizados.
+- [**Interpretador de comandos (shell):**]{.blue} é a principal interface entre um usuário e o sistema operacional.
+
+## Conceitos de sistemas operacionais
+
+> *[Memória virtual:]{.blue} A memória virtual proporciona a <mark>capacidade de executar programas maiores do que a memória física da máquina</mark>, rapidamente movendo pedaços entre a memória RAM e o disco.*
+
+\
+
+Quando se instala o linux é possível definir o <mark>tamanho da partição do disco que será utilizado pela memória virtual (swap).</mark>
+
+## Chamadas de sistema
+
+
