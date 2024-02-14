@@ -19,7 +19,7 @@ self-contained: true
 
 \
 
-> <mark>A função do [sistema operacional]{.blue} é fornecer aos programas do usuário um modelo do computador melhor</mark>, mais simples e mais limpo, assim como lidar com o gerenciamento de todos os recursos mencionados. *A maioria dos computadores tem dois modos de operação: [modo núcleo e modo usuário.]{.blue}*
+> [A função do [sistema operacional]{.blue} é fornecer aos programas do usuário um modelo do computador melhor]{.marked}, mais simples e mais limpo, assim como lidar com o gerenciamento de todos os recursos mencionados. *A maioria dos computadores tem dois modos de operação: [modo núcleo e modo usuário.]{.blue}*
 
 ## Fundamentos de Sistemas Operacionais
 
@@ -28,7 +28,7 @@ self-contained: true
 
 \
 
-O sistema operacional opera em [modo núcleo]{.blue} (também chamado modo supervisor). Nesse modo, <mark>ele tem acesso completo a todo o hardware e *pode executar qualquer instrução</mark> que a máquina for capaz de executar.*
+O sistema operacional opera em [modo núcleo]{.blue} (também chamado modo supervisor). Nesse modo, [ele tem acesso completo a todo o hardware e *pode executar qualquer instrução]{.marked} que a máquina for capaz de executar.*
 :::
 ::: {.column width="60%"}
 
@@ -36,7 +36,7 @@ O sistema operacional opera em [modo núcleo]{.blue} (também chamado modo super
 
 Observe, na figura a seguir, uma visão geral simplificada dos [principais componentes]{.blue}:
 
-![](images/image-01.png)
+![](images/image01-01.png)
 :::
 ::::
 
@@ -52,7 +52,7 @@ O resto do software opera em [modo usuário]{.blue}, no qual apenas um subconjun
 A diferença entre os [modos]{.blue} exerce papel crucial na maneira como os sistemas operacionais funcionam.
 :::
 ::: {.column width="33%" .fragment fragment-index=3}
-<mark>Os sistemas operacionais são enormes, complexos</mark> e têm vida longa. O código-fonte do coração de um sistema operacional como Linux ou Windows tem cerca de cinco milhões de linhas.
+[Os sistemas operacionais são enormes, complexos]{.marked} e têm vida longa. O código-fonte do coração de um sistema operacional como Linux ou Windows tem cerca de cinco milhões de linhas.
 :::
 ::::
 
@@ -60,7 +60,7 @@ A diferença entre os [modos]{.blue} exerce papel crucial na maneira como os sis
 
 \
 
-> *Os sistemas operacionais realizam <mark>duas funções essencialmente não relacionadas</mark>: [(1) fornecer a programadores de aplicativos (e programas aplicativos, claro) um conjunto de recursos abstratos limpo em vez de recursos confusos de hardware, e]{.fragment fragment-index=2  .semi-fade-out} [(2) gerenciar esses recursos de hardware]{.fragment fragment-index=2}*
+> *Os sistemas operacionais realizam [duas funções essencialmente não relacionadas]{.marked}: [(1) fornecer a programadores de aplicativos (e programas aplicativos, claro) um conjunto de recursos abstratos limpo em vez de recursos confusos de hardware, e]{.fragment fragment-index=2  .semi-fade-out} [(2) gerenciar esses recursos de hardware]{.fragment fragment-index=2}*
 
 ## O que é um sistema operacional? 
 
@@ -68,10 +68,10 @@ A diferença entre os [modos]{.blue} exerce papel crucial na maneira como os sis
 
 :::: columns
 ::: {.column width="30%"}
-> *Sistemas operacionais transformam o <mark>feio em belo</mark>, como mostrado na figura:*
+> *Sistemas operacionais transformam o [feio em belo]{.marked}, como mostrado na figura:*
 :::
 ::: {.column width="70%"}
-![](images/image-02.png){width="80%"}
+![](images/image01-02.png){width="80%"}
 :::
 ::::
 
@@ -81,7 +81,7 @@ A diferença entre os [modos]{.blue} exerce papel crucial na maneira como os sis
 
 \
 
-> *[O conceito de um sistema operacional como fundamentalmente <mark>fornecendo abstrações</mark> para programas aplicativos é uma visão top-down (abstração de cima para baixo).]{.fragment fragment-index=2 .semi-fade-out} [Uma visão alternativa, bottom-up (abstração de baixo para cima), sustenta que o sistema operacional está ali para <mark>gerenciar todas as partes de um sistema complexo</mark>.]{.fragment fragment-index=2}*
+> *[O conceito de um sistema operacional como fundamentalmente [fornecendo abstrações]{.marked} para programas aplicativos é uma visão top-down (abstração de cima para baixo).]{.fragment fragment-index=2 .semi-fade-out} [Uma visão alternativa, bottom-up (abstração de baixo para cima), sustenta que o sistema operacional está ali para [gerenciar todas as partes de um sistema complexo]{.marked}.]{.fragment fragment-index=2}*
 
 ## O que é um sistema operacional? 
 
@@ -89,14 +89,14 @@ A diferença entre os [modos]{.blue} exerce papel crucial na maneira como os sis
 
 :::: columns
 ::: {.column width="30%"}
-O gerenciamento de recursos inclui a [multiplexação]{.blue} (compartilhamento) de recursos de duas maneiras diferentes: <mark>no tempo e no espaço</mark>. 
+O gerenciamento de recursos inclui a [multiplexação]{.blue} (compartilhamento) de recursos de duas maneiras diferentes: [no tempo e no espaço]{.marked}. 
 :::
 ::: {.column width="70%"}
 ::: {.fragment fragment-index=2 .semi-fade-out}
-- Quando um recurso é <mark>multiplexado no tempo</mark>, diferentes programas ou usuários se revezam usando-o.
+- Quando um recurso é [multiplexado no tempo]{.marked}, diferentes programas ou usuários se revezam usando-o.
 :::
 ::: {.fragment fragment-index=2}
-- O outro tipo é a <mark>multiplexação de espaço</mark>. Em vez de os clientes se revezarem, cada um tem direito a uma parte do recurso.
+- O outro tipo é a [multiplexação de espaço]{.marked}. Em vez de os clientes se revezarem, cada um tem direito a uma parte do recurso.
 :::
 :::
 ::::
@@ -126,13 +126,13 @@ O gerenciamento de recursos inclui a [multiplexação]{.blue} (compartilhamento)
 > *Um sistema operacional está intimamente ligado ao hardware do computador no qual ele é executado*
 :::
 ::: {.column width="70%"}
-![](images/image-06.png)
+![](images/image01-06.png)
 :::
 ::::
 
 \
 
-A CPU, memória e dispositivos de E/S estão todos conectados por um <mark>sistema de barramento (*bus*)</mark> e comunicam-se uns com os outros sobre ele.
+A CPU, memória e dispositivos de E/S estão todos conectados por um [sistema de barramento (*bus*)]{.marked} e comunicam-se uns com os outros sobre ele.
 
 ## Revisão sobre hardware de computadores
 
@@ -146,7 +146,7 @@ A CPU, memória e dispositivos de E/S estão todos conectados por um <mark>siste
 
 :::: columns
 ::: {.column width="33%" .fragment}
-<mark>Cada CPU tem um conjunto específico de instruções</mark> que ela consegue executar. *Desse modo, um processador x86 não pode executar programas ARM.*
+[Cada CPU tem um conjunto específico de instruções]{.marked} que ela consegue executar. *Desse modo, um processador x86 não pode executar programas ARM.*
 
 :::
 ::: {.column width="33%" .fragment}
@@ -155,7 +155,7 @@ As CPUs têm alguns
 e resultados temporários.
 :::
 ::: {.column width="33%" .fragment}
-Os resgistradores são importantes por causa da <mark>multiplexação de tempo da CPU.</mark>
+Os resgistradores são importantes por causa da [multiplexação de tempo da CPU.]{.marked}
 :::
 ::::
 
@@ -172,7 +172,7 @@ Os resgistradores são importantes por causa da <mark>multiplexação de tempo d
 
 \
 
-![](images/image-09.png)
+![](images/image01-09.png)
 :::
 ::::
 
@@ -199,11 +199,11 @@ A camada superior consiste em [registradores internos]{.blue} à CPU. Eles são 
 
 :::: columns
 ::: {.column width="30%" .fragment}
-[DuckDB]{.blue} tem uma forma de consulta (*vectorized or just-in-time query execution engines*) que <mark>são processadas em lotes de dados que consistem em coleções de vetores</mark>, cada um contendo uma quantidade fixa de valores das colunas.
+[DuckDB]{.blue} tem uma forma de consulta (*vectorized or just-in-time query execution engines*) que [são processadas em lotes de dados que consistem em coleções de vetores]{.marked}, cada um contendo uma quantidade fixa de valores das colunas.
 :::
 
 ::: {.column width="30%" .fragment}
-O resultado é um uso eficiente das operações no cache, <mark>mantendo os dados nas consultas tanto quanto possível no [cache L1 e L2]{.blue}</mark> muito rápido.
+O resultado é um uso eficiente das operações no cache, [mantendo os dados nas consultas tanto quanto possível no [cache L1 e L2]{.blue}]{.marked} muito rápido.
 :::
 ::: {.column width="40%" .fragment}
 ![Fonte: [blog.min.io/duckdb-and-minio-for-a-modern-data-stack/](https://blog.min.io/duckdb-and-minio-for-a-modern-data-stack/)](images/caches.jpeg)
@@ -212,7 +212,7 @@ O resultado é um uso eficiente das operações no cache, <mark>mantendo os dado
 
 ## O zoológico dos sistemas operacionais
 
-- Sistemas operacionais de computadores de grande porte, <mark>de alto desempenho e alta disponibilidade</mark> (*mainframes*)
+- Sistemas operacionais de computadores de grande porte, [de alto desempenho e alta disponibilidade]{.marked} (*mainframes*)
 - Sistemas operacionais de servidores
 - Sistemas operacionais de computadores pessoais
 - Sistemas operacionais de computadores portáteis
@@ -221,26 +221,565 @@ O resultado é um uso eficiente das operações no cache, <mark>mantendo os dado
 
 ## Conceitos de sistemas operacionais
 
-- [**Processos:**]{.blue} <mark>um processo é basicamente um [programa em execução]{.blue}</mark> e associado a cada processo está um [espaço de endereçamento]{.blue}, uma lista de posições de mémoria que vai de 0 a algum máximo, onde o processo pode ler e escrever.
-- [**Espaços de endereçamento:**]{.blue} diz respeito ao gerenciamento e à <mark>proteção da memória principal do computador</mark>, quando se tem multiplos processos sendo executados.
-- [**Arquivos:**]{.blue} um sistema de arquivos é uma estrutura usada por um sistema operacional para organizar e gerenciar arquivos em um dispositivo de armazenamento. <mark>Chamadas do sistemas são necessárias para criar, remover, ler escrever arquivos.</mark> Existe o conceito de [diretório]{.blue} como uma maneira de agrupar os arquivos
+- [**Processos:**]{.blue} [um processo é basicamente um [programa em execução]{.blue}].marked e associado a cada processo está um [espaço de endereçamento]{.blue}, uma lista de posições de mémoria que vai de 0 a algum máximo, onde o processo pode ler e escrever.
+- [**Espaços de endereçamento:**]{.blue} diz respeito ao gerenciamento e à [proteção da memória principal do computador]{.marked}, quando se tem multiplos processos sendo executados.
+- [**Arquivos:**]{.blue} um sistema de arquivos é uma estrutura usada por um sistema operacional para organizar e gerenciar arquivos em um dispositivo de armazenamento. [Chamadas do sistemas são necessárias para criar, remover, ler escrever arquivos.]{.marked} Existe o conceito de [diretório]{.blue} como uma maneira de agrupar os arquivos
 
 ## Conceitos de sistemas operacionais
 
-- [**Entrada/Saída:**]{.blue} o sistema operacional tem um subsistema de E/S para <mark>gerenciamento dos dispositivos</mark>.
-- [**Proteção:**]{.blue} o sistema operacional <mark>gerencia a segurança
-do sistema</mark> de maneira que os arquivos, por exemplo,
+- [**Entrada/Saída:**]{.blue} o sistema operacional tem um subsistema de E/S para [gerenciamento dos dispositivos]{.marked}.
+- [**Proteção:**]{.blue} o sistema operacional [gerencia a segurança
+do sistema]{.marked} de maneira que os arquivos, por exemplo,
 sejam acessíveis somente por usuários autorizados.
 - [**Interpretador de comandos (shell):**]{.blue} é a principal interface entre um usuário e o sistema operacional.
 
 ## Conceitos de sistemas operacionais
 
-> *[Memória virtual:]{.blue} A memória virtual proporciona a <mark>capacidade de executar programas maiores do que a memória física da máquina</mark>, rapidamente movendo pedaços entre a memória RAM e o disco.*
+> *[Memória virtual:]{.blue} A memória virtual proporciona a [capacidade de executar programas maiores do que a memória física da máquina]{.marked}, rapidamente movendo pedaços entre a memória RAM e o disco.*
 
 \
 
-Quando se instala o linux é possível definir o <mark>tamanho da partição do disco que será utilizado pela memória virtual (swap).</mark>
+Quando se instala o linux é possível definir o [tamanho da partição do disco que será utilizado pela memória virtual (swap)]{.marked}.
 
 ## Chamadas de sistema
+
+Já vimos que os sistemas operacionais apresentam duas funções: abstrações para os usuários [e gerenciamento de recursos.]{.fragment  fragment-index=1 .semi-fade-out}
+
+::: {.fragment fragment-index=1}
+- A parte do [gerenciamento de arquivos]{.blue} fica [transparente para os usuários]{.marked} e é feita automaticamente.
+:::
+::: {.fragment fragment-index=2}
+- Na sua maior parte a interação entre programas de usuários e o sistema operacional lida com as [abstrações]{.blue}.
+:::
+
+## Chamadas de sistema
+
+\
+
+:::: columns
+::: {.column width="60%"}
+![A manipulação de uma aplicação de usuário que invoca a chamada de sistema `open()`](images/system-call.png)
+:::
+::: {.column width="40%"}
+1. A função `open()` é executada em [modo usuário]{.blue}
+2. No [modo núcleo/kernel]{.blue} é feita uma busca em um vetor de endereços a implementação da chamada `open()`
+3. O `open()` é executado e [retorna o resultado]{.marked} para o sistema operacional e sequencialmente para o usuário
+:::
+::::
+
+## Chamadas de sistema
+
+\
+
+:::: columns
+::: {.column width="33%" .fragment}
+Os desenvolvedores de aplicações projetam programas de acordo com uma interface de programação de aplicações (API — application programming interface).
+:::
+::: {.column width="33%" .fragment}
+[A API especifica um conjunto de funções que estão disponíveis para um programador de aplicações,]{.marked} incluindo os parâmetros que são passados a cada função e os valores de retorno que o programador pode esperar.
+
+:::
+::: {.column width="33%" .fragment}
+[*Portable Operating System Interface*]{.blue} (POSIX) é uma API para o sistema UNIX/Linux.
+:::
+::::
+
+## Chamadas de sistema
+
+\
+
+:::: columns
+::: {.column}
+
+- Uso da função `write` em `C++`
+
+```{.cpp filename="write.cpp" code-line-numbers="1|3-6"}
+#include<unistd.h>
+
+int main() 
+{
+    write(1, "Ola Mundo!", 10);
+}
+```
+:::
+::: {.column}
+- Nas linguagens de programação C e C++, `unistd.h` é o nome do arquivo de cabeçalho que fornece acesso à API do sistema operacional [POSIX]{.blue}.
+- Compilar: `g++ write.cpp`
+- Executar: `./a.out`
+:::
+::::
+
+## Chamadas de sistema
+
+- Chamadas de sistema para gerenciamento de processos
+- Chamadas de sistema para gerenciamento de arquivos
+- Chamadas de sistema para gerenciamento de diretórios
+- Chamadas de sistema diversas
+
+## Chamadas de sistema para gerenciamento de processos 
+
+\
+
+| Chamada                                | Descrição                                       |
+|----------------------------------------|-------------------------------------------------|
+| `pid = fork()`                         | Criar um processo filho idêntico ao pai         |
+| `pid = waitpid(pid, statloc, options)` | Espera que um processo filho seja concluído     |
+| `s = execve(name, argv, environp)`     | Substitui a imagem do núcleo de um processo     |
+| `exit(status)`                         | Conclui a execução do processo e devolve status |
+
+
+## Chamadas de sistema para gerenciamento de processos 
+### `fork`
+
+```{.cpp filename="fork_exemplo.cpp" code-line-numbers="1-16|1-3|9|14"}
+#include <stdio.h>
+#include <unistd.h>
+
+int main()
+{
+	// make two process which run same
+	// program after this instruction
+	pid = fork();
+	if(pid < 0){
+	perror("fork fail");
+	_exit(1);
+	}
+	printf("Hello world!, process_id(pid) = %d \n", getpid());
+	return 0;
+}
+
+```
+
+\
+
+```
+Hello world!, process_id(pid) = 685 
+Hello world!, process_id(pid) = 686
+```
+
+## Chamadas de sistema para gerenciamento de processos 
+### `waitpid`
+
+```{.cpp filename="waitpid_exemplo.cpp" code-line-numbers="1-6|9-10|13-16|18-21"}
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/wait.h>
+int i = 1;
+int pid;
+int waitpid_return;
+int main ()
+{   
+    printf("process_id(pid) parent= %d\n", getpid());
+    pid = fork();
+    if (pid != 0)
+    {   
+      
+      for (int i = 1; i < 5; i++) {
+        waitpid_return = waitpid(pid, NULL, WNOHANG);
+        printf("%d, process_id(pid) child = %d, waitpid = %d\n", i, pid, waitpid_return);
+      }
+    }
+    else {
+        waitpid_return = waitpid(pid, NULL, WNOHANG);
+        printf("%d, process_id(pid) child = %d, waitpid = %d\n", i, pid, waitpid_return);}
+        return 0;
+    }
+```
+
+## Chamadas de sistema para gerenciamento de processos 
+### `execve`
+
+```{.cpp}
+#include <unistd.h>
+#include <iostream>
+#include <string>
+
+std::string c = "/bin/ls";
+std::string p = "-lh";
+char *args[] = {c.data(), p.data()};
+int main() {
+  execve(args[0], args, NULL);
+}
+
+```
+
+## Chamadas de sistema para gerenciamento de diretórios
+
+\
+
+| Chamada                          | Descrição                                       |
+|----------------------------------|-------------------------------------------------|
+| `s = mkdir(name, mode)`          | Cria um novo diretório                          |
+| `s = rmdir(name)`                | Remove um diretório                             |
+| `s = link(name1, name2)`         | Cria um nova entrada name1 apontando para name2 |
+| `s = unlike(name)`               | Remove uma entrada de diretório                 |
+| `s = mount(special, name, flag)` | Monta um sistema de arquivos                    |
+| `s = unmount(special)`           | Desmonta um sistema de arquivos                 |
+
+## Chamadas de sistema para gerenciamento diversos
+
+\
+
+| Chamada                    | Descrição                                |
+|----------------------------|------------------------------------------|
+| `s = chdir(dirname)`       | Altera o diretório de trabalho           |
+| `s = chmod(name, mode)`    | Altera os bits de proteção de um arquivo |
+| `s = kill(pid, signal)`    | Envia um sinal para um processo          |
+| `seconds = time(&seconds)` | Obtém o tempo decorrido desde 01/01/1970 |
+
+# Estruturas do Sistema Operacional
+
+> *Os sistemas operacionais podem ser organizados de várias maneiras, dependendo de sua estrutura interna e de como eles gerenciam os recursos do computador.*
+
+## Monolítico
+
+\
+
+- Nesta estrutura, todo o sistema operacional [é implementado como um único programa de grande porte]{.marked}.
+- Todas as funcionalidades do sistema operacional, como gerenciamento de memória, gerenciamento de processos e sistemas de arquivos, residem no kernel.
+- Exemplos [incluem sistemas operacionais mais antigos]{.marked}, como MS-DOS e versões mais antigas do UNIX.
+
+## Microkernel
+
+\
+
+- Neste modelo, o kernel é mínimo e [fornece apenas as funcionalidades básicas]{.marked}, como gerenciamento de memória, comunicação entre processos e escalonamento de CPU.
+- Funcionalidades adicionais, como sistemas de arquivos e drivers de dispositivos, são implementadas como processos de usuário que se comunicam com o kernel.
+- Exemplos incluem o MINIX e o Symbian.
+
+*Desse modo, um erro no driver de áudio fará que o som fique truncado ou pare, [mas não derrubará o computador.]{.marked}*
+
+## Híbrido
+
+\
+
+- Esta abordagem combina elementos do [kernel monolítico e do microkernel]{.blue}.
+- [O kernel contém algumas funcionalidades essenciais,]{.marked} como gerenciamento de memória e escalonamento de processos, enquanto outras funcionalidades são implementadas como módulos do kernel ou como processos de usuário.
+- Exemplos incluem Linux, Windows NT/2000/XP/Vista/7/8/10.
+
+## Sistemas Virtuais
+
+\
+
+- Esta estrutura cria uma máquina virtual que [simula uma arquitetura de hardware]{.marked} para cada processo.
+- Cada processo tem a ilusão de que possui seu próprio sistema operacional.
+- Exemplos incluem máquinas virtuais como VMware, VirtualBox e Hyper-V.
+
+![(a) Um hipervisor de tipo 1. (b) Um hipervisor de tipo 2 puro. (c) Um hipervisor de tipo 2 na prática.](images/image01-29.jpg)
+
+# Gerenciamento de processos
+
+> *O conceito mais central em qualquer sistema operacional é o processo: [uma abstração de um programa em execução.]{.marked}*
+
+## Processos
+
+- Um processo é apenas uma instância de um programa em execução, incluindo os valores atuais do contador do programa, registradores e variáveis.
+- Processos podem ser criados e terminados dinamicamente.
+- Cada processo tem seu próprio espaço de endereçamento.
+
+## O modelo de processo
+
+## Criação de processos
+
+> *Sistemas operacionais precisam de alguma maneira para criar processos.*
+
+Quatro eventos principais fazem com que os processos sejam criados:
+
+:::: columns
+::: {.column width="25%" .fragment}
+[Inicialização do sistema]{.blue}. Alguns processos são de (1) primeiro plano, sendo processos que interagem com o usuário; (2) segundo plano, processos que não estão associados a um usuário (*daemons*)
+:::
+::: {.column width="25%" .fragment}
+[Execução de uma chamada de sistema]{.blue} de criação de processo por um processo em execução. [Um processo em execução emitirá chamadas de sistema para criar processos novos para ajudá-lo em seu trabalho]{.marked}
+:::
+::: {.column width="25%" .fragment}
+[Solicitação de um usuário]{.blue} para criar um novo processo. Em sistemas interativos, os usuários podem começar um programa [digitando um comando ou clicando duas vezes]{.marked} sobre um ícone.
+:::
+::: {.column width="25%" .fragment}
+Início de uma [tarefa em lote]{.blue}. *Pense no gerenciamento de estoque ao fim de um dia em uma cadeia de lojas, nesse caso usuários podem submeter tarefas em lote ao servidor (possivelmente de maneira remota).*
+:::
+::::
+
+## Criação de processos
+
+:::: columns
+::: {.column width="40%"}
+No UNIX, há apenas uma chamada de sistema para criar um novo processo: [fork]{.blue}. [Essa chamada cria um clone exato do processo que a chamou.]{.marked} Após a fork, os dois processos, o pai e o filho, têm a mesma imagem de memória, as mesmas variáveis de ambiente e os mesmos arquivos abertos. Mas atuam de forma independente.
+:::
+::: {.column width="60%"}
+Como identificar processos filho?
+
+```{.bash filename="child.sh"}
+!/bin/bash
+sleep infinity
+```
+
+```{.bash filename="parent.sh"}
+!/bin/bash
+./child.sh &
+sleep infinity
+```
+
+```{filename="$"}
+parent.sh &
+```
+
+Usando:
+```{filename="$"}
+pgrep -P <parent pid>
+pgrep -lP <parent pid>
+pstree -p <parent pid>
+ps --ppid <parent pid>
+ls /proc/<parent pid>/task
+cat /proc/<parent pid>/task/<parent pid>/children
+```
+:::
+::::
+
+## Término de processos
+
+:::: columns
+::: {.column}
+Após um processo ter sido criado, ele começa a ser executado e realiza qualquer que seja o seu trabalho. *No entanto, nada dura para sempre, nem mesmo os processos.* Cedo ou tarde, o novo processo terminará, normalmente devido a uma das condições a seguir:
+
+1. Saída normal (voluntária).
+2. Erro fatal (involuntário).
+3. Saída por erro (voluntária).
+4. Morto por outro processo (involuntário).
+:::
+::: {.column}
+Exemplos:
+
+1. `ctrl + c` para interromper programas ou processos no primeiro plano
+2. `!g++ foo.cpp` e `foo.cpp` não existe no diretório
+3. Um Erro interno do processo que afeta seu funcionamento, então o usuário é avisado e o programa termina
+4. `kill <pid>`
+:::
+::::
+
+## Hierarquias de processos
+
+:::: columns
+::: {.column}
+- Em alguns sistemas, quando um processo cria outro, o processo pai e o processo filho continuam a ser associados de certas maneiras. 
+- O processo filho pode em si criar mais processos, formando uma hierarquia de processos.
+
+```{filename="$"}
+./grandparent.sh
+ps -efj | egrep "PGID|children|parent"
+kill -9 -<pgid>
+```
+:::
+::: {.column}
+```{.bash filename="grandparent.sh"}
+!/bin/bash
+bash parent.sh &
+bash parent.sh &
+for i in {1..100}; do 
+sleep 2; 
+echo -n "This is the grandparent process $i"; 
+done
+```
+
+```{.bash filename="parent.sh"}
+!/bin/bash
+bash children.sh &
+bash children.sh &
+for i in {1..100}; do sleep 2; echo -n "This is the parent process $i"; 
+done
+```
+
+```{.bash filename="children.sh"}
+!/bin/bash
+for i in {1..100}; do 
+sleep 2; 
+echo -n "This is a test in children process $i"; 
+done
+```
+:::
+::::
+
+## Estados de processos
+
+\
+
+:::: columns
+::: {.column width="60%"}
+- Embora cada processo seja uma entidade independente, com seu próprio contador de programa e estado interno, processos muitas vezes precisam interagir entre si.
+- Um processo pode gerar alguma saída que outro processo usa como entrada.
+
+\
+
+```{filename="$"}
+curl -s https://openbible.com/textfiles/kjv.txt | \
+grep "Exodus\s2" | \
+head -4
+```
+
+:::
+::: {.column width="40%"}
+São 3 Estados:
+
+1. [Em execução]{.blue} (realmente usando a CPU naquele instante).
+2. [Pronto]{.blue} (executável, temporariamente parado  para deixar outro processo ser executado).
+3. [Bloqueado]{.blue} (incapaz de ser executado até que algum evento externo aconteça).
+
+<center>![](images/image02-02.png){height="120"}</center>
+:::
+::::
+
+## Estados de processos
+
+O nível mais baixo de um sistema operacional estruturado em processos controla interrupções e escalonamento. Acima desse nível estão processos sequenciais. 
+
+<center>![](images/image02-03.png){height="300"}</center>
+
+> *O [escalonamento]{.blue}, isto é, [decidir qual processo deve ser executado, quando e por quanto tempo, é um assunto importante;]{.marked} nós o examinaremos mais adiante neste capítulo. Muitos [algoritmos]{.blue} foram desenvolvidos para tentar [equilibrar as demandas concorrentes de eficiência para o sistema como um todo e justiça para os processos individuais.]{.marked}*
+
+## Implementação de processos
+
+> *Para implementar o modelo de processos, o sistema operacional mantém uma tabela (um arranjo de estruturas) chamada de [tabela de processos]{.blue}, com uma entrada para cada um deles.*
+
+:::: columns
+::: {.column width="40%"}
+- Essas entradas contêm informações importantes sobre o [estado do processo]{.blue} quando ele é [trocado do estado em execução para pronto ou bloqueado]{.marked}
+- Podendo o processo [retornar precisamente para o mesmo estado em que se encontrava antes de ser interrompido.]{.marked}
+:::
+::: {.column width="60%"}
+![Alguns dos campos de uma entrada típica na tabela de processos](images/image02-04.png)
+:::
+::::
+
+## Threads
+
+\
+
+> *Cada [processo]{.blue} tem um espaço de endereçamento e um único thread de controle. Na realidade, essa é quase a definição de um [processo]{.blue}. Não obstante isso, em muitas situações, é desejável ter múltiplos threads de controle no mesmo espaço de endereçamento executando em quase paralelo, como se eles fossem (quase) processos separados (exceto pelo espaço de endereçamento compartilhado).*
+
+## Threads, miniprocessos
+
+\
+
+> *Por que alguém iria querer ter um tipo de processo dentro de um processo?* Na realidade, há várias razões para a existência desses miniprocessos, chamados [threads]{.blue}
+
+:::: columns
+::: {.column width="25%" .fragment}
+A capacidade para as [entidades]{.blue} em paralelo [compartilharem um espaço de endereçamento e todos os seus dados entre si.]{.marked}
+:::
+::: {.column width="25%" .fragment}
+[São mais leves do que os processos,]{.marked} eles são mais fáceis (isto é, mais rápidos) para criar e destruir do que os processos.
+:::
+::: {.column width="25%" .fragment}
+Quando há uma computação substancial e também E/S substancial, contar com [threads permite que essas atividades se sobreponham]{.marked}.
+:::
+::: {.column width="25%" .fragment}
+[Threads]{.blue} são úteis em sistemas com múltiplas CPUs, onde o [paralelismo real]{.marked} é possível.
+:::
+::::
+
+## Um processador de texto com três threads
+
+\
+
+:::: columns
+::: {.column}
+[Um thread interage com o usuário]{.marked} e o [outro lida com a reformatação em segundo plano]{.marked}. *Tão logo a frase é apagada da página 1, o thread interativo diz ao de reformatação para reformatar o livro inteiro*. Enquanto isso, o thread interativo continua a ouvir o teclado e o mouse e responde a comandos simples como rolar a página 1 enquanto o outro thread está trabalhando com afinco no segundo plano. [Um terceiro thread pode fazer backups de disco sem interferir nos outros dois.]{.marked}
+:::
+::: {.column}
+![](images/image02-07.png)
+:::
+::::
+
+## Um processador de texto com três threads
+
+\
+
+> *Deve ficar claro que ter três processos em separado não funcionaria aqui, pois todos os três threads precisam operar no documento. [Ao existirem três threads em vez de três processos, eles compartilham de uma memória comum.]{.marked}*
+
+## O modelo de thread clássico
+
+\
+
+:::: columns
+::: {.column}
+a. vemos três processos tradicionais. Cada processo tem seu próprio espaço de endereçamento e um único thread de controle. [Cada um deles opera em um espaço de endereçamento diferente.]{.marked}
+b. vemos um único processo com três threads de controle. Embora em ambos os casos tenhamos três threads. [Todos os três compartilham o mesmo espaço de endereçamento.]{.marked}
+:::
+::: {.column}
+![](images/image02-11.png)
+
+> *Todo thread pode acessar todo espaço de endereçamento de memória dentro do espaço de endereçamento do processo, [um thread pode ler, escrever, ou mesmo apagar a pilha de outro thread.]{.marked} Não há proteção, porque (1) é impossível e (2) não seria necessário.*
+
+:::
+::::
+
+## Threads POSIX
+
+\
+
+:::: columns
+::: {.column width="33%" .fragment}
+Para possibilitar que se escrevam programas com threads portáteis, [o IEEE definiu um padrão para threads]{.marked} no padrão IEEE 1003.1c. O pacote de threads que ele define é chamado [Pthreads]{.blue}.
+:::
+::: {.column width="33%" .fragment}
+Todos os threads têm determinadas propriedades. Cada um tem um identificador, um conjunto de registradores (incluindo o contador de programa), e um conjunto de atributos, que são armazenados em uma estrutura.
+:::
+::: {.column width="33%" .fragment}
+
+Algumas das chamadas de função do Pthreads:
+
+![](images/image02-14.png)
+:::
+::::
+
+## Executando Threads
+
+\
+
+```{.python filename="multiple_threads.py" code-line-numbers="|9|12-15|22-27|29-32"}
+
+"""
+Executando Múltiplas Threads
+
+https://realpython.com/intro-to-python-threading/
+"""
+
+import logging
+import threading
+import time
+
+def thread_function(name):
+    logging.info("Thread %s: starting, ID: %s", name, threading.get_native_id())
+    time.sleep(2)
+    logging.info("Thread %s: finishing", name)
+
+if __name__ == "__main__":
+    format = "%(asctime)s: %(message)s"
+    logging.basicConfig(format=format, level=logging.INFO,
+                        datefmt="%H:%M:%S")
+
+    threads = list()
+    for index in range(3):
+        logging.info("Main    : create and start thread %d.", index)
+        x = threading.Thread(target=thread_function, args=(index,))
+        threads.append(x)
+        x.start()
+
+    for index, thread in enumerate(threads):
+        logging.info("Main    : before joining thread %d.", index)
+        thread.join()
+        logging.info("Main    : thread %d done", index)
+```
+
+
+
+
+
+
+
+
+
+
+
 
 
