@@ -246,7 +246,7 @@ Quando se instala o linux é possível definir o [tamanho da partição do disco
 Já vimos que os sistemas operacionais apresentam duas funções: abstrações para os usuários [e gerenciamento de recursos.]{.fragment  fragment-index=1 .semi-fade-out}
 
 ::: {.fragment fragment-index=1}
-- A parte do [gerenciamento de arquivos]{.blue} fica [transparente para os usuários]{.marked} e é feita automaticamente.
+- A parte do [gerenciamento de recursos]{.blue} fica [transparente para os usuários]{.marked} e é feita automaticamente.
 :::
 ::: {.fragment fragment-index=2}
 - Na sua maior parte a interação entre programas de usuários e o sistema operacional lida com as [abstrações]{.blue}.
@@ -331,7 +331,7 @@ int main()
 ## Chamadas de sistema para gerenciamento de processos 
 ### `fork`
 
-```{.cpp filename="fork_exemplo.cpp" code-line-numbers="1-16|1-3|9|14"}
+```{.cpp filename="fork_exemplo.cpp" code-line-numbers="1-16|1-3|8-9|14"}
 #include <stdio.h>
 #include <unistd.h>
 
@@ -479,6 +479,20 @@ int main() {
 
 ## O modelo de processo
 
+:::: columns
+::: {.column width="50%"}
+a. Vemos um computador multiprogramando quatro programas na memória.
+b. Vemos quatro processos, cada um com seu próprio fluxo de controle e sendo executado independente dos outros. 
+c. Vemos que, analisados durante um intervalo longo o suficiente, todos os processos tiveram progresso, mas a qualquer dado instante apenas um está sendo de fato executado.
+:::
+::: {.column width="50%%"}
+
+\
+
+<center>![](images/image02-01.jpg)</center>
+:::
+::::
+
 ## Criação de processos
 
 > *Sistemas operacionais precisam de alguma maneira para criar processos.*
@@ -620,11 +634,25 @@ head -4
 ::: {.column width="40%"}
 São 3 Estados:
 
-1. [Em execução]{.blue} (realmente usando a CPU naquele instante).
-2. [Pronto]{.blue} (executável, temporariamente parado  para deixar outro processo ser executado).
-3. [Bloqueado]{.blue} (incapaz de ser executado até que algum evento externo aconteça).
+- [Em execução]{.blue} (realmente usando a CPU naquele instante).
+- [Pronto]{.blue} (executável, temporariamente parado  para deixar outro processo ser executado).
+- [Bloqueado]{.blue} (incapaz de ser executado até que algum evento externo aconteça).
+:::
+::::
 
-<center>![](images/image02-02.png){height="120"}</center>
+## Estados de processos
+
+\
+
+:::: columns
+::: {.column}
+1. O processo é [bloqueado]{.blue} aguardando uma entrada
+2. O escalonador [seleciona outro]{.blue} processo
+3. O escalonador [seleciona esse]{.blue} processo
+4. A entrada torna-se [disponível]{.blue}
+:::
+::: {.column}
+![Um processo pode estar nos estados em execução, bloqueado ou pronto. Transições entre esses estados ocorrem como mostrado.](images/image02-02.png){width="80%"}
 :::
 ::::
 
@@ -770,6 +798,28 @@ if __name__ == "__main__":
         thread.join()
         logging.info("Main    : thread %d done", index)
 ```
+
+## Convertendo de um thread para multithread
+
+### Conflitos entre threads sobre o uso de uma variável global
+
+\
+
+:::: columns
+::: {.column .fragment}
+Conflitos entre threads sobre o uso de uma variável
+global.
+![](images/image02-19.png){width="90%"}
+:::
+::: {.column .fragment}
+Threads podem ter variáveis globais individuais.
+
+![](images/image02-20.png){width="50%"}
+:::
+::::
+
+
+
 
 
 
