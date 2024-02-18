@@ -269,11 +269,108 @@ Já vimos que os sistemas operacionais apresentam duas funções: abstrações p
 
 ## Chamadas de sistema
 
+> API: *elemento que proporciona uma ligação física ou lógica entre dois sistemas ou partes de um sistema que não poderiam ser conectados diretamente.*
+
+- API define um [conjunto de normas que possibilita a comunicação]{.marked} entre plataformas por meio de uma série de padrões e protocolos.
+- Por meio de APIs, desenvolvedores podem criar novos softwares e aplicativos capazes de se comunicar com outras plataformas. Por exemplo: [caso um desenvolvedor queira criar um aplicativo de fotos para Android, ele poderá ter acesso à câmera do celular através da API do sistema operacional, sem ter a necessidade de criar uma nova interface de câmera do zero.]{.marked}. 
+
+\
+
+*Aqui uma abstração da complexidade!*
+
+## Chamadas de sistema
+
+> *As chamadas de sistema sempre foram o meio pelo qual os programas de [espaço do usuário]{.blue} podem acessar os [serviços do kernel]{.blue}*
+
+```{mermaid}
+graph LR;
+    subgraph U[Usuário]
+    A[Função: mkdir] --> B[Interface de Chamada de Sistema: sys_mkdir];
+
+    end
+    subgraph K[Kernel]
+    B --> C[Manipulador de Chamada de Sistema];
+    end
+
+    style U fill:#ffffff
+    style K fill:#e4e4e4
+```
+
+\
+
+:::: columns
+::: {.column}
+
+- Cria um novo diretório (pasta)
+```{.bash code-line-numbers="false"}
+mkdir mynewdir
+```
+- Visualizar a interface de chamada
+```{.bash code-line-numbers="false"}
+cat /usr/include/asm*/unistd.h | grep -B 1 sys_mkdir
+```
+```
+#define __NR_mkdirat 34
+__SYSCALL(__NR_mkdirat, sys_mkdirat)
+```
+:::
+::: {.column}
+
+- Visualizar os registradores onde são armazenados as info da chamada
+```{.bash code-line-numbers="false"}
+cpuid -1 -r | head
+```
+```
+CPU:
+   0x00000000 0x00: eax=0x0000000d ebx=0x756e6547 ecx=0x6c65746e edx=0x49656e69
+   0x00000001 0x00: eax=0x000406f0 ebx=0x01020800 ecx=0xfefa3203 edx=0x1f8bfbff
+```
+:::
+::::
+
+## Chamadas de sistema
+
+Uma chamada de sistem pode necessitar de outras chamadas serem realizadas
+
+```{.bash code-line-numbers="false"}
+strace -c mkdir mynewdir
+```
+
+```
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+  0.00    0.000000           0         5           read
+  0.00    0.000000           0         8           close
+  0.00    0.000000           0        18           mmap
+  0.00    0.000000           0         7           mprotect
+  0.00    0.000000           0         1           munmap
+  0.00    0.000000           0         3           brk
+  0.00    0.000000           0         4           pread64
+  0.00    0.000000           0         2         2 access
+  0.00    0.000000           0         1           execve
+  0.00    0.000000           0         1           mkdir
+  0.00    0.000000           0         2         2 statfs
+  0.00    0.000000           0         2         1 arch_prctl
+  0.00    0.000000           0         1           set_tid_address
+  0.00    0.000000           0        26        20 openat
+  0.00    0.000000           0        26        20 newfstatat
+  0.00    0.000000           0         1           set_robust_list
+  0.00    0.000000           0         1           prlimit64
+  0.00    0.000000           0         1           getrandom
+  0.00    0.000000           0         1           rseq
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.000000           0       111        45 total
+```
+
+## Chamadas de sistema
+
 \
 
 :::: columns
 ::: {.column width="33%" .fragment}
 Os desenvolvedores de aplicações projetam programas de acordo com uma interface de programação de aplicações (API — application programming interface).
+
+
 :::
 ::: {.column width="33%" .fragment}
 [A API especifica um conjunto de funções que estão disponíveis para um programador de aplicações,]{.marked} incluindo os parâmetros que são passados a cada função e os valores de retorno que o programador pode esperar.
@@ -283,6 +380,10 @@ Os desenvolvedores de aplicações projetam programas de acordo com uma interfac
 [*Portable Operating System Interface*]{.blue} (POSIX) é uma API para o sistema UNIX/Linux.
 :::
 ::::
+
+::: {.fragment}
+*Se usarmos o comando `ps`, ele deverá se comportar da mesma forma no OpenBSD, Debian e macOS.*
+:::
 
 ## Chamadas de sistema
 
@@ -308,6 +409,67 @@ int main()
 - Executar: `./a.out`
 :::
 ::::
+
+## Chamada de sistema
+
+\
+
+Abaixo a chamada de sistema `write` sendo utilizada
+
+```{.bash code-line-numbers="false"}
+strace -o trace.txt ./a.out
+
+cat trace.txt | grep -A 5 write
+```
+```
+write(1, "Ola Mundo!", 10)              = 10
+exit_group(0)                           = ?
++++ exited with 0 +++
+```
+
+## Chamada de sistema
+
+\
+
+No fim das contas um `printf` realiza a mesma chamada de sistema `write`
+
+:::: columns
+::: {.column}
+```{.cpp filename="write.cpp" code-line-numbers="1|3-6"}
+#include<stdio.h>
+
+int main() 
+{
+    printf("Ola Mundo!");
+}
+```
+:::
+::: {.column}
+```{.bash code-line-numbers="false"}
+strace -o trace.txt ./a.out
+
+cat trace.txt | grep -A 5 write
+```
+```
+write(1, "Ola Mundo!", 10)              = 10
+exit_group(0)                           = ?
++++ exited with 0 +++
+```
+:::
+::::
+
+## Chamada de sistema
+
+\
+
+```{.bash code-line-numbers="false"}
+strace -o trace.txt python -c 'print("Ola Mundo!")'
+
+cat trace.txt | grep -A 5 write 
+```
+
+- Será realizada a chamada de sistema `write`?
+- Comparar com as chamadas de sistema feitas com `C++`
 
 ## Chamadas de sistema
 
@@ -425,7 +587,6 @@ int main() {
 | `s = chdir(dirname)`       | Altera o diretório de trabalho           |
 | `s = chmod(name, mode)`    | Altera os bits de proteção de um arquivo |
 | `s = kill(pid, signal)`    | Envia um sinal para um processo          |
-| `seconds = time(&seconds)` | Obtém o tempo decorrido desde 01/01/1970 |
 
 # Estruturas do Sistema Operacional
 
@@ -586,7 +747,7 @@ kill -9 -<pgid>
 :::
 ::: {.column}
 ```{.bash filename="grandparent.sh"}
-!/bin/bash
+#!/bin/bash
 bash parent.sh &
 bash parent.sh &
 for i in {1..100}; do 
@@ -596,7 +757,7 @@ done
 ```
 
 ```{.bash filename="parent.sh"}
-!/bin/bash
+#!/bin/bash
 bash children.sh &
 bash children.sh &
 for i in {1..100}; do sleep 2; echo -n "This is the parent process $i"; 
@@ -604,7 +765,7 @@ done
 ```
 
 ```{.bash filename="children.sh"}
-!/bin/bash
+#!/bin/bash
 for i in {1..100}; do 
 sleep 2; 
 echo -n "This is a test in children process $i"; 
