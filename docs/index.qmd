@@ -36,7 +36,7 @@ O sistema operacional opera em [modo núcleo]{.blue} (também chamado modo super
 
 Observe, na figura a seguir, uma visão geral simplificada dos [principais componentes]{.blue}:
 
-![](images/image01-01.png)
+![](images/tanenbaum-01-01.png)
 :::
 ::::
 
@@ -71,7 +71,7 @@ A diferença entre os [modos]{.blue} exerce papel crucial na maneira como os sis
 > *Sistemas operacionais transformam o [feio em belo]{.marked}, como mostrado na figura:*
 :::
 ::: {.column width="70%"}
-![](images/image01-02.png){width="80%"}
+![](images/tanenbaum-01-02.png){width="80%"}
 :::
 ::::
 
@@ -126,7 +126,7 @@ O gerenciamento de recursos inclui a [multiplexação]{.blue} (compartilhamento)
 > *Um sistema operacional está intimamente ligado ao hardware do computador no qual ele é executado*
 :::
 ::: {.column width="70%"}
-![](images/image01-06.png)
+![](images/tanenbaum-01-06.png)
 :::
 ::::
 
@@ -172,7 +172,7 @@ Os resgistradores são importantes por causa da [multiplexação de tempo da CPU
 
 \
 
-![](images/image01-09.png)
+![](images/tanenbaum-01-09.png)
 :::
 ::::
 
@@ -221,7 +221,7 @@ O resultado é um uso eficiente das operações no cache, [mantendo os dados nas
 
 ## Conceitos de sistemas operacionais
 
-- [**Processos:**]{.blue} [um processo é basicamente um [programa em execução]{.blue}].marked e associado a cada processo está um [espaço de endereçamento]{.blue}, uma lista de posições de mémoria que vai de 0 a algum máximo, onde o processo pode ler e escrever.
+- [**Processos:**]{.blue} [um processo é basicamente um [programa em execução]{.blue}]{.marked} e associado a cada processo está um [espaço de endereçamento]{.blue}, uma lista de posições de mémoria que vai de 0 a algum máximo, onde o processo pode ler e escrever.
 - [**Espaços de endereçamento:**]{.blue} diz respeito ao gerenciamento e à [proteção da memória principal do computador]{.marked}, quando se tem multiplos processos sendo executados.
 - [**Arquivos:**]{.blue} um sistema de arquivos é uma estrutura usada por um sistema operacional para organizar e gerenciar arquivos em um dispositivo de armazenamento. [Chamadas do sistemas são necessárias para criar, remover, ler escrever arquivos.]{.marked} Existe o conceito de [diretório]{.blue} como uma maneira de agrupar os arquivos
 
@@ -241,6 +241,15 @@ sejam acessíveis somente por usuários autorizados.
 
 Quando se instala o linux é possível definir o [tamanho da partição do disco que será utilizado pela memória virtual (swap)]{.marked}.
 
+```{.bash code-line-numbers="false"}
+free
+```
+```
+              total        used        free      shared  buff/cache   available
+Mem:        13290480      480388    10480984        1252     2329108    12527384
+Swap:              0           0           0
+```
+
 ## Chamadas de sistema
 
 Já vimos que os sistemas operacionais apresentam duas funções: abstrações para os usuários [e gerenciamento de recursos.]{.fragment  fragment-index=1 .semi-fade-out}
@@ -258,7 +267,7 @@ Já vimos que os sistemas operacionais apresentam duas funções: abstrações p
 
 :::: columns
 ::: {.column width="60%"}
-![A manipulação de uma aplicação de usuário que invoca a chamada de sistema `open()`](images/system-call.png)
+![A manipulação de uma aplicação de usuário que invoca a chamada de sistema `open()`](images/silberschatz-02-06.png)
 :::
 ::: {.column width="40%"}
 1. A função `open()` é executada em [modo usuário]{.blue}
@@ -318,7 +327,7 @@ __SYSCALL(__NR_mkdirat, sys_mkdirat)
 
 - Visualizar os registradores onde são armazenados as info da chamada
 ```{.bash code-line-numbers="false"}
-cpuid -1 -r | head
+cpuid -1 -r | head -3
 ```
 ```
 CPU:
@@ -493,35 +502,67 @@ cat trace.txt | grep -A 5 write
 ## Chamadas de sistema para gerenciamento de processos 
 ### `fork`
 
-```{.cpp filename="fork_exemplo.cpp" code-line-numbers="1-16|1-3|8-9|14"}
+::: {.panel-tabset}
+### Python
+```{.python filename="fork_exemplo.py" code-line-numbers="|1|4|6-7|9|11-12"}
+import os
+import sys
+
+pid = os.fork()
+
+if pid < 0:
+  sys.exit("Fork fail")
+
+print(f"Hello world!, process_id(pid) = {os.getpid()}\n")
+
+# Hello world!, process_id(pid) = 7534
+# Hello world!, process_id(pid) = 7536
+```
+
+### C++
+```{.cpp filename="fork_exemplo.cpp" code-line-numbers="|2|6|11|15-16"}
 #include <stdio.h>
 #include <unistd.h>
 
 int main()
 {
-	// make two process which run same
-	// program after this instruction
 	pid = fork();
 	if(pid < 0){
-	perror("fork fail");
+	perror("Fork fail");
 	_exit(1);
 	}
 	printf("Hello world!, process_id(pid) = %d \n", getpid());
 	return 0;
 }
 
+// Hello world!, process_id(pid) = 685 
+// Hello world!, process_id(pid) = 686
 ```
-
-\
-
-```
-Hello world!, process_id(pid) = 685 
-Hello world!, process_id(pid) = 686
-```
+:::
 
 ## Chamadas de sistema para gerenciamento de processos 
 ### `waitpid`
 
+::: {.panel-tabset}
+
+### Python
+```{.python filename="waitpid_exemplo.py" code-line-numbers="|1|3-5|7|8-11|12-13"}
+import os
+
+i = 1
+waitpid_return = ()
+print(f"process_id(pid) parent= {os.getpid()}\n")
+
+pid = os.fork()
+if pid > 0:
+  for i in range(1, 6):
+    waitpid_return = os.waitpid(pid, os.WNOHANG)
+    print(f"{i}, process_id(pid) child = {pid}, waitpid = {waitpid_return}\n")
+else:
+  print(f"{i}, process_id(pid) child = {pid}, waitpid = {waitpid_return}\n")
+```
+
+### C++
 ```{.cpp filename="waitpid_exemplo.cpp" code-line-numbers="1-6|9-10|13-16|18-21"}
 #include <stdio.h>
 #include <unistd.h>
@@ -547,11 +588,14 @@ int main ()
         return 0;
     }
 ```
+:::
 
 ## Chamadas de sistema para gerenciamento de processos 
 ### `execve`
 
-```{.cpp}
+::: {.panel-tabset}
+### C++
+```{.cpp filename="execve.cpp"}
 #include <unistd.h>
 #include <iostream>
 #include <string>
@@ -564,6 +608,7 @@ int main() {
 }
 
 ```
+:::
 
 ## Chamadas de sistema para gerenciamento de diretórios
 
@@ -578,6 +623,25 @@ int main() {
 | `s = mount(special, name, flag)` | Monta um sistema de arquivos                    |
 | `s = unmount(special)`           | Desmonta um sistema de arquivos                 |
 
+## Chamadas de sistema para gerenciamento de diretórios
+
+### Exemplos
+
+```{.bash code-line-numbers="false"}
+# Criar um novo diretório
+mkdir mynewdir
+
+# Remover um diretório
+rmdir mynewdir
+
+# Criar link entre arquivos
+link myfile1 myfile2
+
+# Criar link simbólico (atalho)
+ln -s myfile1 myfile2
+
+```
+
 ## Chamadas de sistema para gerenciamento diversos
 
 \
@@ -587,6 +651,46 @@ int main() {
 | `s = chdir(dirname)`       | Altera o diretório de trabalho           |
 | `s = chmod(name, mode)`    | Altera os bits de proteção de um arquivo |
 | `s = kill(pid, signal)`    | Envia um sinal para um processo          |
+
+## Chamadas de sistema para gerenciamento diversos
+
+### Exemplos
+
+```{.bash code-line-numbers="false"}
+# Alterar um diretório (geralmente se usa cd)
+chdir <diretório existente>
+
+# Define a proteção de um arquivo
+chmod 700 myfile
+
+# "Matar" um processo
+kill <pid>
+```
+
+## Proteção de um arquivo
+
+\
+
+Devo utilizar um valor octal para *usuário/grupo/outros*
+
+| Octal | Binário | Código de Proteção                 |
+|-------|---------|------------------------------------|
+| 0     | 000     | Nenhuma permissão                  |
+| 1     | 001     | Permissão de execução              |
+| 2     | 010     | Permissão de escrita               |
+| 3     | 011     | Permissão de escrita e execução    |
+| 4     | 100     | Permissão de leitura               |
+| 5     | 101     | Permissão de leitura e execução    |
+| 6     | 110     | Permissão de leitura e escrita     |
+| 7     | 111     | Todas as permissões                |
+
+```{.bash code-line-numbers="false"}
+# Permissão de escrita para o usuário (2) e nenhuma permissão para o grupo (0) e outros (0)
+chmod 200 myfile
+
+# Permissão de leitura/escrita para o usuário (6) e permissão de leitura para o grupo (4)
+chmod 640 myfile
+```
 
 # Estruturas do Sistema Operacional
 
@@ -626,37 +730,67 @@ int main() {
 - Cada processo tem a ilusão de que possui seu próprio sistema operacional.
 - Exemplos incluem máquinas virtuais como VMware, VirtualBox e Hyper-V.
 
-![(a) Um hipervisor de tipo 1. (b) Um hipervisor de tipo 2 puro. (c) Um hipervisor de tipo 2 na prática.](images/image01-29.jpg)
+![(a) Um hipervisor de tipo 1. (b) Um hipervisor de tipo 2 puro. (c) Um hipervisor de tipo 2 na prática. Uma discussão sobre a diferença entre hipervisors 1 e 2: <https://aws.amazon.com/pt/compare/the-difference-between-type-1-and-type-2-hypervisors/>](images/tanenbaum-01-29.jpg){height="250"}
 
 # Gerenciamento de processos
 
 > *O conceito mais central em qualquer sistema operacional é o processo: [uma abstração de um programa em execução.]{.marked}*
 
+## Contador de Programa e Registrador de Instruções 
+
+\
+
+:::: columns
+::: {.column}
+- [Contador de Programa (*Program Counter*)]{.blue}, é um registrador de propósito especial usado pelo processador para [armazenar o endereço da próxima instrução]{.marked} a ser executada.
+- [Registrador de Instruções (*Instruction Register*)]{.blue} contém a [instrução que está sendo executada]{.marked} pela CPU
+
+![Ciclo de instrução básico](images/stallings-03-03.png){width="90%"}
+
+:::
+::: {.column}
+Início da execução do programa:
+
+1. O [Contador de Programa]{.blue} contém 0x00000000 (digamos que este seja o endereço de início do programa na memória).
+2. A instrução codificada é buscada na memória e colocada no [Registrador de Instruções]{.blue}.
+3. A instrução é decodificada e executada.
+4. Agora é hora de avançar para o próximo endereço de instrução, e seguir o mesmo processo (ciclo de intrução)
+:::
+::::
+
+## Contador de Programa e Registrador de Instruções 
+
+\
+
+<center>![](images/von-neumann-architecture.jpeg)</center>
+
 ## Processos
 
-- Um processo é apenas uma instância de um programa em execução, incluindo os valores atuais do contador do programa, registradores e variáveis.
+- Um processo [é apenas uma instância de um programa em execução]{.marked}, incluindo os valores atuais do contador do programa, registradores e variáveis.
 - Processos podem ser criados e terminados dinamicamente.
-- Cada processo tem seu próprio espaço de endereçamento.
+- Cada processo tem seu próprio [espaço de endereçamento]{.blue}.
 
 ## O modelo de processo
 
 :::: columns
 ::: {.column width="50%"}
-a. Vemos um computador multiprogramando quatro programas na memória.
-b. Vemos quatro processos, cada um com seu próprio fluxo de controle e sendo executado independente dos outros. 
+a. Vemos um computador multiprogramando quatro programas na memória (com contador programa físico).
+b. Vemos quatro processos, cada um com seu próprio fluxo de controle e sendo executado independente dos outros (contador de programa lógico). 
 c. Vemos que, analisados durante um intervalo longo o suficiente, todos os processos tiveram progresso, mas a qualquer dado instante apenas um está sendo de fato executado.
 :::
 ::: {.column width="50%%"}
 
 \
 
-<center>![](images/image02-01.jpg)</center>
+<center>![](images/tanenbaum-02-01.jpg)</center>
+
+> *Em qualquer sistema de multiprogramação, [a CPU muda de um processo para outro rapidamente, executando cada um por dezenas ou centenas de milissegundos]{.marked}, dando a ilusão do [paralelismo]{.blue}.*
 :::
 ::::
 
 ## Criação de processos
 
-> *Sistemas operacionais precisam de alguma maneira para criar processos.*
+> *Sistemas operacionais precisam de alguma maneira criar processos.*
 
 Quatro eventos principais fazem com que os processos sejam criados:
 
@@ -685,22 +819,22 @@ No UNIX, há apenas uma chamada de sistema para criar um novo processo: [fork]{.
 Como identificar processos filho?
 
 ```{.bash filename="child.sh"}
-!/bin/bash
+#!/bin/bash
 sleep infinity
 ```
 
 ```{.bash filename="parent.sh"}
-!/bin/bash
+#!/bin/bash
 ./child.sh &
 sleep infinity
 ```
 
-```{filename="$"}
+```{.bash filename="$"}
 parent.sh &
 ```
 
 Usando:
-```{filename="$"}
+```{.bash filename="$"}
 pgrep -P <parent pid>
 pgrep -lP <parent pid>
 pstree -p <parent pid>
@@ -813,7 +947,7 @@ São 3 Estados:
 4. A entrada torna-se [disponível]{.blue}
 :::
 ::: {.column}
-![Um processo pode estar nos estados em execução, bloqueado ou pronto. Transições entre esses estados ocorrem como mostrado.](images/image02-02.png){width="80%"}
+![Um processo pode estar nos estados em execução, bloqueado ou pronto. Transições entre esses estados ocorrem como mostrado.](images/tanenbaum-02-02.png){width="80%"}
 :::
 ::::
 
@@ -821,7 +955,7 @@ São 3 Estados:
 
 O nível mais baixo de um sistema operacional estruturado em processos controla interrupções e escalonamento. Acima desse nível estão processos sequenciais. 
 
-<center>![](images/image02-03.png){height="300"}</center>
+<center>![](images/tanenbaum-02-03.png){height="300"}</center>
 
 > *O [escalonamento]{.blue}, isto é, [decidir qual processo deve ser executado, quando e por quanto tempo, é um assunto importante;]{.marked} nós o examinaremos mais adiante neste capítulo. Muitos [algoritmos]{.blue} foram desenvolvidos para tentar [equilibrar as demandas concorrentes de eficiência para o sistema como um todo e justiça para os processos individuais.]{.marked}*
 
@@ -835,11 +969,75 @@ O nível mais baixo de um sistema operacional estruturado em processos controla 
 - Podendo o processo [retornar precisamente para o mesmo estado em que se encontrava antes de ser interrompido.]{.marked}
 :::
 ::: {.column width="60%"}
-![Alguns dos campos de uma entrada típica na tabela de processos](images/image02-04.png)
+![Alguns dos campos de uma entrada típica na tabela de processos](images/tanenbaum-02-04.png)
 :::
 ::::
 
-## Threads
+# Scheduling de Processos
+
+## Scheduling de Processos
+
+\
+
+:::: columns
+::: {.column width="33%" .fragment}
+O objetivo da multiprogramação é haver [sempre algum processo em execução para maximizar a utilização da CPU.]{.marked}
+:::
+::: {.column width="33%" .fragment}
+O compartilhamento de tempo é [alternar a CPU entre os processos, com tanta frequência]{.marked}, que os usuários possam interagir com cada programa enquanto ele está sendo executado.
+:::
+::: {.column width="33%" .fragment}
+Para alcançar esses objetivos, [o scheduler de processos seleciona um processo disponível]{.marked} (possivelmente em um conjunto de vários processos disponíveis) para execução na CPU.
+:::
+::::
+
+## Scheduling de Processos
+
+Cada processo é representado, no sistema operacional, por um bloco de controle de processo (PCB - *process control block*) - também chamado bloco de controle de tarefa.
+
+:::: columns
+::: {.column width="20%" .fragment}
+[Estado do processo]{.blue} pode ser novo, pronto, em execução, em espera, parado, e assim por diante.
+:::
+::: {.column width="20%" .fragment}
+[Contador do programa.]{.blue} indica o endereço da próxima instrução a ser executada para esse processo.
+:::
+::: {.column width="20%" .fragment}
+[Registradores da CPU]{.blue} incluem acumuladores, registradores índice, ponteiros de pilhas e registradores de uso geral, além de qualquer informação do código de condição.
+:::
+::: {.column width="20%" .fragment}
+[Informações de scheduling da CPU]{.blue} incluem a prioridade de um processo, ponteiros para filas de scheduling e quaisquer outros parâmetros de scheduling.
+:::
+::: {.column width="20%" .fragment}
+[Informações de gerenciamento da memória]{.blue} podem incluir itens como o valor dos registradores base e limite e as tabelas de páginas, ou as tabelas de segmentos.
+:::
+::::
+
+## Fila de scheduling
+
+:::: columns
+::: {.column}
+Quando os processos entram no sistema, eles são inseridos em uma [fila de *jobs* que é composta por todos os processos no sistema]{.marked}. Os processos que estão residindo na memória principal e estão prontos e esperando execução são mantidos em uma lista chamada fila de prontos.
+:::
+::: {.column}
+![](images/silberschatz-03-04.png)
+:::
+::::
+
+## Mudança de contexto
+
+\
+
+> *[A alocação da CPU a outro processo requer a execução do salvamento do estado]{.marked} do processo corrente e a restauração do estado de um processo diferente. Essa tarefa é conhecida como [mudança de contexto]{.blue}*
+
+\
+
+- As interrupções fazem com que o sistema operacional tire a CPU de sua tarefa corrente para executar uma rotina do kernel.
+- Essas operações ocorrem, com frequência, em sistemas de uso geral. 
+- O contexto é representado no PCB do processo.
+
+
+# Threads
 
 \
 
@@ -875,7 +1073,7 @@ Quando há uma computação substancial e também E/S substancial, contar com [t
 [Um thread interage com o usuário]{.marked} e o [outro lida com a reformatação em segundo plano]{.marked}. *Tão logo a frase é apagada da página 1, o thread interativo diz ao de reformatação para reformatar o livro inteiro*. Enquanto isso, o thread interativo continua a ouvir o teclado e o mouse e responde a comandos simples como rolar a página 1 enquanto o outro thread está trabalhando com afinco no segundo plano. [Um terceiro thread pode fazer backups de disco sem interferir nos outros dois.]{.marked}
 :::
 ::: {.column}
-![](images/image02-07.png)
+![](images/tanenbaum-02-07.png)
 :::
 ::::
 
@@ -895,7 +1093,7 @@ a. vemos três processos tradicionais. Cada processo tem seu próprio espaço de
 b. vemos um único processo com três threads de controle. Embora em ambos os casos tenhamos três threads. [Todos os três compartilham o mesmo espaço de endereçamento.]{.marked}
 :::
 ::: {.column}
-![](images/image02-11.png)
+![](images/tanenbaum-02-11.png)
 
 > *Todo thread pode acessar todo espaço de endereçamento de memória dentro do espaço de endereçamento do processo, [um thread pode ler, escrever, ou mesmo apagar a pilha de outro thread.]{.marked} Não há proteção, porque (1) é impossível e (2) não seria necessário.*
 
@@ -917,7 +1115,7 @@ Todos os threads têm determinadas propriedades. Cada um tem um identificador, u
 
 Algumas das chamadas de função do Pthreads:
 
-![](images/image02-14.png)
+![](images/tanenbaum-02-14.png)
 :::
 ::::
 
@@ -970,12 +1168,12 @@ if __name__ == "__main__":
 ::: {.column .fragment}
 Conflitos entre threads sobre o uso de uma variável
 global.
-![](images/image02-19.png){width="90%"}
+![](images/tanenbaum-02-19.png){width="90%"}
 :::
 ::: {.column .fragment}
 Threads podem ter variáveis globais individuais.
 
-![](images/image02-20.png){width="50%"}
+![](images/tanenbaum-02-20.png){width="50%"}
 :::
 ::::
 
