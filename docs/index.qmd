@@ -291,21 +291,21 @@ Já vimos que os sistemas operacionais apresentam duas funções: abstrações p
 
 > *As chamadas de sistema sempre foram o meio pelo qual os programas de [espaço do usuário]{.blue} podem acessar os [serviços do kernel]{.blue}*
 
-```{mermaid}
-graph LR;
-    subgraph U[Usuário]
-    A[Função: mkdir] --> B[Interface de Chamada de Sistema: sys_mkdir];
+<center>
 
+```{mermaid}
+flowchart LR;
+    subgraph U["Usuário"]
+    A(Função <br> mkdir) --> B[Interface de Chamada de Sistema <br> sys_mkdir];
     end
-    subgraph K[Kernel]
-    B --> C[Manipulador de Chamada de Sistema];
+    subgraph K["Kernel"]
+    B --> C[Manipulador de <br> Chamada de Sistema];
     end
 
     style U fill:#ffffff
     style K fill:#e4e4e4
 ```
-
-\
+</center>
 
 :::: columns
 ::: {.column}
@@ -1035,6 +1035,30 @@ Quando os processos entram no sistema, eles são inseridos em uma [fila de *jobs
 - As interrupções fazem com que o sistema operacional tire a CPU de sua tarefa corrente para executar uma rotina do kernel.
 - Essas operações ocorrem, com frequência, em sistemas de uso geral. 
 - O contexto é representado no PCB do processo.
+
+## Mudança de contexto
+
+\
+
+O tempo gasto na mudança de contexto é puro [*overhead*]{.blue} porque o sistema não executa trabalho útil durante a permuta de processos. [A velocidade da permuta varia de uma máquina para outra, dependendo da velocidade da memória, do número de registradores a serem copiados]{.marked}
+
+## Comunicação Interprocessos
+
+\
+
+> *Os processos que são executados concorrentemente no sistema operacional podem ser [processos independentes]{.blue} ou [processos cooperativos]{.blue}*
+
+\
+
+:::: columns
+::: {.column}
+[Um processo é [independente]{.blue} quando não pode afetar outros processos em execução]{.marked} no sistema nem ser afetado por eles. Qualquer processo que não compartilhe dados com outros processos é independente.
+::: 
+::: {.column}
+[Um processo é [cooperativo]{.blue} quando pode afetar outros processos em execução no sistema ou pode ser afetado por eles.]{.marked} É claro que qualquer processo que compartilhe dados com outros processos é um processo cooperativo.
+::: 
+::::
+
 
 
 # Threads
