@@ -1059,6 +1059,231 @@ O tempo gasto na mudança de contexto é puro [*overhead*]{.blue} porque o siste
 ::: 
 ::::
 
+## Comunicação Interprocessos
+
+\
+
+Razões para o fornecimento de um ambiente que permita a cooperação entre processos:
+
+:::: columns
+::: {.column width="25%"}
+[Compartilhamento de informações.]{.blue} Já que vários usuários podem estar interessados no mesmo bloco de informações (por exemplo, um arquivo compartilhado), devemos fornecer um ambiente que permita o acesso concorrente.
+:::
+::: {.column width="25%"}
+[Aumento da velocidade de computação.]{.blue} Se quisermos que uma tarefa em particular seja executada mais rapidamente, devemos dividi-la em subtarefas a serem executadas em paralelo.
+:::
+::: {.column width="25%"}
+[Modularidade.]{.blue} Podemos querer construir o sistema de forma modular, dividindo suas funções em processos
+:::
+::: {.column width="25%"}
+[Conveniência.]{.blue} Até mesmo um usuário individual pode trabalhar em muitas tarefas ao mesmo tempo. Por exemplo, um usuário pode editar, ouvir música e compilar em paralelo.
+:::
+:::: 
+
+## Processos cooperativos
+
+\
+
+Processos cooperativos demandam um mecanismo de comunicação entre processos (IPC) que lhes permita trocar dados e informações. Há dois modelos básicos de comunicação entre processos: [memória compartilhada e transmissão de mensagens]{.blue}.
+
+:::: columns
+::: {.column width="33%"}
+No modelo de [memória compartilhada]{.blue}, estabelece-se uma região da memória que é compartilhada por processos cooperativos. Os processos podem, então, trocar informações lendo e gravando dados na região compartilhada.
+:::
+::: {.column width="33%"}
+No modelo de [transmissão de mensagens]{.blue}, a comunicação ocorre por meio de mensagens trocadas entre os sistemas cooperativos. 
+:::
+::: {.column width="33%"}
+![](images/silberschatz-03-12.png)
+:::
+::::
+
+## Sistema de memória compartilhada
+
+\
+
+A comunicação entre processos que usam memória compartilhada [requer que os processos em comunicação estabeleçam uma região de memória compartilhada.]{.marked} Normalmente, a região de memória compartilhada reside no espaço de endereçamento do processo que cria o segmento de memória compartilhada. Outros processos que queiram se comunicar usando esse segmento de memória compartilhada devem anexá-lo ao seu espaço de endereçamento. 
+
+## Sistema de memória compartilhada
+
+\
+
+### Condições de corrida
+
+:::: columns
+::: {.column}
+Em alguns sistemas operacionais, processos que estão trabalhando juntos podem compartilhar de alguma memória comum que cada um pode ler e escrever.
+:::
+::: {.column}
+![](images/tanenbaum-02-21.png)
+
+Veja na figura dois processos querem acessar a memória compartilhada ao mesmo tempo.
+:::
+::::
+
+## Sistema de memória compartilhada
+
+\
+
+### Regiões críticas
+
+:::: columns
+::: {.column}
+[Como evitar as condições de corrida?]{.marked} A chave para evitar problemas aqui e em muitas outras situações envolvendo memória compartilhada, arquivos compartilhados e tudo o mais compartilhado é encontrar alguma maneira de [proibir mais de um processo de ler e escrever os dados compartilhados ao mesmo tempo.]{.marked}
+:::
+::: {.column}
+Colocando a questão em outras palavras, o que precisamos é de [exclusão mútua]{.blue}, isto é, alguma maneira de se certificar de que [se um processo está usando um arquivo ou variável compartilhados, os outros serão impedidos de realizar a mesma coisa.]{.marked}
+
+![](images/tanenbaum-02-22.png)
+
+:::
+::::
+
+## Regiões críticas
+
+\
+
+[Quatro condições são estabelecidas]{.marked} para se chegar a uma boa solução de corridas:
+1. Dois processos jamais podem estar simultaneamente dentro de suas regiões críticas.
+2. Nenhuma suposição pode ser feita a respeito de velocidades ou do número de CPUs.
+3. Nenhum processo executando fora de sua região crítica pode bloquear qualquer processo.
+4. Nenhum processo deve ser obrigado a esperar eternamente para entrar em sua região crítica.
+
+## Exclusão mútua com espera ocupada
+
+### Desabilitando interrupções
+
+:::: columns
+::: {.column}
+[Com as interrupções desabilitadas, nenhuma interrupção de relógio poderá ocorrer.]{.marked} Afinal de contas, a CPU só é chaveada de processo em processo em consequência de uma interrupção de relógio ou outra, e com as interrupções desligadas, a CPU não será chaveada para outro processo. [Então, assim que um processo tiver desabilitado as interrupções, ele poderá examinar e atualizar a memória compartilhada]{.marked} sem medo de que qualquer outro processo interfira.
+:::
+::: {.column}
+Contudo, em um sistema multinúcleo (isto é, sistema de multiprocessador) [desabilitar as interrupções de uma CPU não evita que outras CPUs interfiram com as operações que a primeira está realizando.]{.marked} Em consequência, esquemas mais sofisticados são necessários.
+:::
+::::
+
+## Exclusão mútua com espera ocupada
+
+### Variáveis do tipo trava
+
+:::: columns
+::: {.column}
+Considere ter uma única variável (de trava) compartilhada, inicialmente 0. [Quando um processo quer entrar em sua região crítica, ele primeiro testa a trava. Se a trava é 0, o processo a configura para 1 e entra na região crítica.]{.marked} *Se a trava já é 1,o processo apenas espera até que ela se torne 0.* Desse modo, um 0 significa que nenhum processo está na região crítica, e um 1 significa que algum processo está em sua região crítica.
+:::
+::: {.column}
+Infelizmente, essa ideia contém exatamente a mesma falha fatal que vimos no diretório de spool. Suponha que um processo lê a trava e vê que ela é 0. Antes que ele possa configurar a trava para 1, outro processo está escalonado, executa e configura a trava para 1. Quando o primeiro processo executa de novo, ele também configurará a trava para 1, e [dois processos estarão nas suas regiões críticas ao mesmo tempo.]{.marked}
+:::
+::::
+
+## Exclusão mútua com espera ocupada
+
+### Alternância explícita
+
+:::: columns
+::: {.column}
+A variável do tipo inteiro `turn`, inicialmente 0, serve para controlar de quem é a vez de entrar na região crítica e examinar ou atualizar a memória compartilhada. Inicialmente, o processo 0 inspeciona `turn`, descobre que ele é 0 e entra na sua região crítica. O processo 1 também encontra lá o valor 0 e, portanto, espera em um laço fechado testando continuamente turn para ver quando ele vira 1. Testar continuamente uma variável até que algum valor apareça é chamado de espera ocupada.
+:::
+::: {.column}
+
+```{.python}
+while True:
+  while turn != 1:
+    print("processo 0 na região crítica")
+    turn = 1
+    print("processo 0 na região não crítica")
+
+while True:
+  while turn != 0:
+    print("processo 1 na região crítica")
+    turn = 0
+    print("processo 1 na região não crítica")
+```
+
+Digamos que em algum momento os dois processos estão em suas regiões não críticas e o processo 0 colocar `turn` para 1, mas ele termina o seu processo e precisar retornar para região crítica, mas está impedido.
+:::
+::::
+
+## Exclusão mútua com espera ocupada
+
+\
+
+### Solução de Peterson
+
+Antes de usar as variáveis compartilhadas (isto é, antes de entrar na região crítica), cada processo chama enter_region com seu próprio número de processo, 0 ou 1, como parâmetro. Essa chamada fará que ele espere, se necessário, até que seja seguro entrar. Após haver terminado com as variáveis compartilhadas, o processo chama leave_region para indicar que ele terminou e para permitir que outros processos entrem, se assim desejarem.
+
+## Exclusão mútua com espera ocupada
+
+\
+
+### Solução de Peterson
+
+```{.python}
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import threading
+import time
+
+cs = 0
+flag_0 = False
+flag_1 = False
+turn = 0
+
+def thread_0():
+    global cs, flag_0, flag_1, turn
+
+    flag_0 = True
+    turn = 1
+    while (flag_1 and turn == 1):
+            continue
+
+    for i in range(10):
+        cs += 1
+        print("Thread 0: cs =", cs)
+        time.sleep(0.1)
+
+    flag_0 = False
+
+def thread_1():
+    global cs, flag_0, flag_1, turn
+
+    flag_1 = True
+    turn = 0
+    while (flag_0 and turn == 0):
+        continue
+
+    for i in range(10):
+        cs += 1000
+        print("Thread 1: cs =", cs)
+        time.sleep(0.1)
+
+    flag_1 = False
+
+if __name__ == "__main__":
+		t0 = threading.Thread(target=thread_0)
+		t1 = threading.Thread(target=thread_1)
+		t0.start()
+		t1.start()
+
+# Reference: https://www.aspires.cc/implementing-peterson-algorithm-with-python/
+```
+
+## Sistemas de Transmissão de Mensagens
+
+\
+
+A transmissão de mensagens fornece um mecanismo para permitir que os processos se comuniquem e sincronizem suas ações sem compartilhar o mesmo espaço de endereçamento. Isso é particularmente útil em um ambiente distribuído em que os processos em comunicação podem residir em diferentes computadores conectados por uma rede. Por exemplo, um programa de bate-papo na Internet poderia ser projetado de modo que os participantes se comuniquem uns com os outros trocando mensagens.
+
+Um recurso de transmissão de mensagens fornece, pelo menos, duas operações:
+
+- send(message)
+- receive(message)
+
+## Sistemas de Transmissão de Mensagens
+
+\
+
+### Sockets
 
 
 # Threads
