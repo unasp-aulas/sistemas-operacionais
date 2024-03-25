@@ -165,6 +165,7 @@ Os resgistradores são importantes por causa da [multiplexação de tempo da CPU
 
 :::: columns
 ::: {.column width="30%"}
+
 ### Memória 
 > *É o segundo principal componente em qualquer computador, o qual deve ser rápido ao extremo (mais rápida do que executar uma instrução, de maneira que a CPU não seja atrasada pela memória).*
 :::
@@ -1284,7 +1285,109 @@ Um recurso de transmissão de mensagens fornece, pelo menos, duas operações:
 \
 
 ### Sockets
+Um socket é definido como uma [extremidade de comunicação]{.blue}. [Um par de processos comunicando-se por uma rede emprega um par de sockets — um para cada processo. Um socket é identificado por um endereço IP concatenado com um número de porta.]{.marked} Geralmente, os sockets usam uma arquitetura cliente-servidor. O servidor espera solicitações recebidas de clientes ouvindo em uma porta especificada. Uma vez que uma solicitação seja recebida, o servidor aceita uma conexão proveniente do socket do cliente para completá-la.
 
+## Sisitemas de Transmissão de Mensagens
+
+\
+
+:::: columns
+::: {.column}
+
+```{.python filename="server.py"}
+import socket
+
+
+def run_server():
+    # create a socket object
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    server_ip = "127.0.0.1"
+    port = 8000
+
+    # bind the socket to a specific address and port
+    server.bind((server_ip, port))
+    # listen for incoming connections
+    server.listen(0)
+    print(f"Listening on {server_ip}:{port}")
+
+    # accept incoming connections
+    client_socket, client_address = server.accept()
+    print(f"Accepted connection from {client_address[0]}:{client_address[1]}")
+
+    # receive data from the client
+    while True:
+        request = client_socket.recv(1024)
+        request = request.decode("utf-8") # convert bytes to string
+        
+        # if we receive "close" from the client, then we break
+        # out of the loop and close the conneciton
+        if request.lower() == "close":
+            # send response to the client which acknowledges that the
+            # connection should be closed and break out of the loop
+            client_socket.send("closed".encode("utf-8"))
+            break
+
+        print(f"Received: {request}")
+
+        response = "accepted".encode("utf-8") # convert string to bytes
+        # convert and send accept response to the client
+        client_socket.send(response)
+
+    # close connection socket with the client
+    client_socket.close()
+    print("Connection to client closed")
+    # close server socket
+    server.close()
+
+
+run_server()
+
+```
+:::
+::: {.column}
+
+```{.python filename="client.py"}
+import socket
+
+
+def run_client():
+    # create a socket object
+    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    server_ip = "127.0.0.1"  # replace with the server's IP address
+    server_port = 8000  # replace with the server's port number
+    # establish connection with server
+    client.connect((server_ip, server_port))
+
+    while True:
+        # input message and send it to the server
+        msg = input("Enter message: ")
+        client.send(msg.encode("utf-8")[:1024])
+
+        # receive message from the server
+        response = client.recv(1024)
+        response = response.decode("utf-8")
+
+        # if server sent us "closed" in the payload, we break out of the loop and close our socket
+        if response.lower() == "closed":
+            break
+
+        print(f"Received: {response}")
+
+    # close client socket (connection to the server)
+    client.close()
+    print("Connection to server closed")
+
+run_client()
+
+```
+:::
+::::
+
+\
+
+Exemplo extraído [daqui](https://www.datacamp.com/tutorial/a-complete-guide-to-socket-programming-in-python)
 
 # Threads
 
@@ -1425,6 +1528,204 @@ Threads podem ter variáveis globais individuais.
 ![](images/tanenbaum-02-20.png){width="50%"}
 :::
 ::::
+
+# Scheduling da CPU
+
+> *O scheduling da CPU é a base dos sistemas operacionais multiprogramados. Alternando a CPU entre os processos, o sistema operacional pode tornar o computador mais produtivo.*
+
+## Ciclo de Picos de CPU e I/O
+
+
+
+:::: columns
+::: {.column}
+O sucesso do scheduling da CPU depende de uma propriedade observada nos processos: a execução de processos consiste em um ciclo de [execução da CPU e espera por I/O.]{.marked} Os processos se alternam entre esses dois estados. A execução do processo começa com um pico de CPU. Esse é seguido por um pico de I/O, que é seguido por outro pico de CPU e, então, outro pico de I/O, e assim por diante. Eventualmente, o último pico de CPU termina com o sistema solicitando o encerramento da execução
+:::
+::: {.column}
+
+<center>
+![](images/silberschatz-06-01.png){width="45%"}
+</center>
+<center>
+![](images/silberschatz-06-02.png){width="50%"}
+</center>
+
+:::
+::::
+
+## Scheduler da CPU
+
+Sempre que a CPU se torna ociosa, o sistema operacional deve selecionar um dos processos na fila de prontos para ser executado. O processo de seleção é realizado pelo scheduler de curto prazo, ou scheduler da CPU. O scheduler seleciona um processo entre os processos na memória que estão prontos para execução e aloca a CPU a esse processo.
+
+## Scheduling com Preempção
+
+\
+
+Decisões de scheduling da CPU podem ser tomadas sob as seguintes circunstâncias:
+
+1. Quando um processo passa do estado de execução para o estado de espera [por exemplo, como resultado de uma solicitação de I/O ou de uma invocação a `wait` para o encerramento de um processo-filho]
+2. Quando um processo passa do estado de execução para o estado de pronto (por exemplo, quando ocorre uma interrupção)
+3. Quando um processo passa do estado de espera para o estado de pronto (por exemplo, na conclusão de I/O)
+4. Quando um processo termina
+
+
+## Scheduling com Preempção
+
+\
+
+Nas situações 1 e 4, não há alternativa no que diz respeito ao scheduling. Um novo processo (se existir um na fila de prontos) deve ser selecionado para execução. Há uma alternativa, no entanto, nas situações 2 e 3.
+
+\ 
+
+Quando o scheduling ocorre apenas sob as circunstâncias 1 e 4, dizemos que o esquema de scheduling é sem preempção ou cooperativo. Caso contrário, ele tem preempção.
+
+## Despachante
+
+\
+
+Outro componente envolvido na função de scheduling da CPU é o [despachante]{.blue}. O despachante [é o módulo que passa o controle da CPU ao processo selecionado pelo scheduler de curto prazo]{.marked}. Essa função envolve o seguinte:
+
+- Mudança de contexto
+- Mudança para a modalidade de usuário
+- Salto para a locação apropriada no programa do usuário para que ele seja reiniciado.
+
+\
+
+O tempo que o despachante leva para interromper um processo e iniciar a execução de outro é conhecido como [latência do despacho]{.blue}.
+
+## Critérios de Scheduling {.smaller}
+
+Diferentes algoritmos de scheduling da CPU têm diferentes propriedades, e a escolha de um algoritmo específico pode favorecer uma classe de processos em vez de outra. Seguem alguns critérios para comparação de algorítmos:
+
+:::: columns
+::: {.column width="20%"}
+[Utilização da CPU.]{.blue} Queremos manter a CPU tão ocupada quanto possível. [Conceitualmente, a utilização da CPU pode variar de 0 a 100%.]{.marked} Em um sistema real, ela deve variar de 40% (para um sistema pouco carregado) a 90% (para um sistema pesadamente carregado).
+:::
+::: {.column width="20%"}
+[Throughput.]{.blue} Se a CPU está ocupada executando processos, trabalho está sendo realizado. [Uma medida de trabalho é o número de processos que são concluídos por unidade de tempo, chamado throughput.]{.marked} Para processos longos, essa taxa pode ser de um processo por hora; para transações curtas, ela pode ser de dez processos por segundo.
+:::
+::: {.column width="20%"}
+[Tempo de turnaround.]{.blue} Do ponto de vista de um processo específico, o critério importante é quanto tempo ele leva para ser executado. [O intervalo entre o momento em que o processo é submetido e o momento de sua conclusão é o tempo de turnaround.]{.marked} O tempo de turnaround é a soma dos períodos gastos em espera para entrar na memória, em espera na fila de prontos, em execução na CPU, e executando I/O.
+:::
+::: {.column width="20%"}
+[Tempo de espera.]{.blue} O algoritmo de scheduling da CPU não afeta o período de tempo durante o qual um processo é executado ou faz I/O. [Ele afeta somente o período de tempo que um processo gasta esperando na fila de prontos.]{.marked} O tempo de espera é a soma dos períodos gastos em espera na fila de prontos.
+:::
+::: {.column width="20%"}
+[Tempo de resposta.]{.blue} Em um sistema interativo, o tempo de turnaround pode não ser o melhor critério. Com frequência, um processo consegue produzir alguma saída bem mais cedo e pode continuar computando novos resultados enquanto resultados anteriores estão sendo exibidos para o usuário.
+:::
+::::
+
+## Algoritmos de Scheduling
+
+### Scheduling "Primeiro-a-Chegar, Primeiro-a-Ser-Atendido"
+
+O algoritmo mais simples de scheduling da CPU é o algoritmo "primeiro-a-chegar, primeiro-a-ser-atendido" (FCFS – first-come, first-served). 
+- Nesse esquema, o processo que solicita a CPU primeiro é o primeiro a usá-la. 
+- Quando um processo entra na fila de prontos, seu PCB é conectado na cauda da fila. Quando a CPU está livre, ela é alocada ao processo na cabeça da fila.
+- O lado negativo é que o tempo médio de espera na política FCFS geralmente é bem longo.
+
+## Algoritmos de Scheduling
+
+### Scheduling Menor-Job-Primeiro
+
+Esse algoritmo associa a cada processo a duração do próximo pico de CPU do processo. Quando a CPU está disponível, ela é atribuída ao processo que tem o próximo pico de CPU mais curto
+
+# Instalação e Configuração do Linux
+
+## [Instalação via WSL](https://learn.microsoft.com/pt-br/windows/wsl/install)
+
+Abra o PowerShell e execute
+
+```{.bash filename="PowerShell"}
+wsl --install
+```
+
+Por padrão será instalada a distribuição Ubuntu.
+
+\
+
+Caso queira instalar uma outra distribuição adcione o argumento `-d` e o nome da distribuição
+
+```{.bash filename="PowerShell"}
+wsl --install -d <nome da distribuição>
+```
+
+## [Configuração do ambiente](https://learn.microsoft.com/pt-br/windows/wsl/setup/environment)
+
+\
+
+- Após a instalação será necessário definir um usuário e uma senha
+- Caso você não seja o administrador da máquina, será necessária algumas configurações adicionais:
+
+No PowerShell execute o comando para poder acessar o usuário `root`:
+
+```{.bash filename="PowerShell"}
+wsl --install -d <nome da distribuição> -u <nome do usuário>
+```
+
+Por exemplo caso tenha instalado o Debian, será `-d Debian`
+
+- Adicionar o seu usuário no sudoers para ter acesso a alguns privilégios
+
+No terminal do linux digitar o comando
+
+```{.bash filename="$"}
+usermod -aG sudo <nome do usuário>
+```
+
+## Instalando programas
+
+\
+
+Nas distribuições derivadas do Debian o gerenciador de pacotes é o `apt`
+
+- Para instalar o programa `cmatrix`
+
+```{.bash filename="$"}
+sudo apt install cmatrix
+```
+
+Para executar escreva `cmatrix` no terminal
+
+```{.bash filename="$"}
+cmatrix
+```
+
+## Erros que podem surgir na instalação
+
+\
+
+Comandos que podem ser executados para solucionar erros de instalação
+
+```{.bash}
+sudo apt install cmatrix --fix-missing
+```
+
+```{.bash}
+sudo apt update
+sudo apt --fix-broken install
+```
+
+## Alguns programas úteis
+
+\
+
+- `neovim` editor de código
+- `g++` compilador de código `c++`
+- `tmux` permite que várias sessões de terminal sejam acessadas simultaneamente em uma única janela
+- `wget` permite fazer download de conteúdos da web
+
+Para instalar todos eles de uma vez
+
+```{.bash filename="$"}
+sudo apt install neovim g++ tmux wget
+```
+
+
+
+
+
+
 
 
 
