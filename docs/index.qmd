@@ -620,7 +620,7 @@ int main() {
 | `s = mkdir(name, mode)`          | Cria um novo diretório                          |
 | `s = rmdir(name)`                | Remove um diretório                             |
 | `s = link(name1, name2)`         | Cria um nova entrada name1 apontando para name2 |
-| `s = unlike(name)`               | Remove uma entrada de diretório                 |
+| `s = unlink(name)`               | Remove uma entrada de diretório                 |
 | `s = mount(special, name, flag)` | Monta um sistema de arquivos                    |
 | `s = unmount(special)`           | Desmonta um sistema de arquivos                 |
 
@@ -670,27 +670,35 @@ kill <pid>
 
 ## Proteção de um arquivo
 
-\
-
 Devo utilizar um valor octal para *usuário/grupo/outros*
 
-| Octal | Binário | Código de Proteção                 |
-|-------|---------|------------------------------------|
-| 0     | 000     | Nenhuma permissão                  |
-| 1     | 001     | Permissão de execução              |
-| 2     | 010     | Permissão de escrita               |
-| 3     | 011     | Permissão de escrita e execução    |
-| 4     | 100     | Permissão de leitura               |
-| 5     | 101     | Permissão de leitura e execução    |
-| 6     | 110     | Permissão de leitura e escrita     |
-| 7     | 111     | Todas as permissões                |
+| Octal | Binário | Código de Proteção                 |     |
+|-------|---------|------------------------------------|-----|
+| 0     | 000     | Nenhuma permissão                  |`---`|          
+| 1     | 001     | Permissão de execução              |`--x`|
+| 2     | 010     | Permissão de escrita               |`-w-`|
+| 3     | 011     | Permissão de escrita e execução    |`-wx`|
+| 4     | 100     | Permissão de leitura               |`r--`|
+| 5     | 101     | Permissão de leitura e execução    |`r-x`|
+| 6     | 110     | Permissão de leitura e escrita     |`rw-`|
+| 7     | 111     | Todas as permissões                |`rwx`|
 
 ```{.bash code-line-numbers="false"}
 # Permissão de escrita para o usuário (2) e nenhuma permissão para o grupo (0) e outros (0)
 chmod 200 myfile
+ls -l myfile
+```
+```
+--w-------  1 thop  staff  0 27 Mar 16:18 myfile
+```
 
+```{.bash code-line-numbers="false"}
 # Permissão de leitura/escrita para o usuário (6) e permissão de leitura para o grupo (4)
 chmod 640 myfile
+ls -l myfile
+```
+```
+-rw-r-----  1 thop  staff  0 27 Mar 16:18 myfile
 ```
 
 # Estruturas do Sistema Operacional
@@ -1555,6 +1563,8 @@ O sucesso do scheduling da CPU depende de uma propriedade observada nos processo
 
 ## Scheduler da CPU
 
+\
+
 Sempre que a CPU se torna ociosa, o sistema operacional deve selecionar um dos processos na fila de prontos para ser executado. O processo de seleção é realizado pelo scheduler de curto prazo, ou scheduler da CPU. O scheduler seleciona um processo entre os processos na memória que estão prontos para execução e aloca a CPU a esse processo.
 
 ## Scheduling com Preempção
@@ -1563,7 +1573,7 @@ Sempre que a CPU se torna ociosa, o sistema operacional deve selecionar um dos p
 
 Decisões de scheduling da CPU podem ser tomadas sob as seguintes circunstâncias:
 
-1. Quando um processo passa do estado de execução para o estado de espera [por exemplo, como resultado de uma solicitação de I/O ou de uma invocação a `wait` para o encerramento de um processo-filho]
+1. Quando um processo passa do estado de execução para o estado de espera [por exemplo, como resultado de uma solicitação de I/O ou de uma invocação a `wait` para o encerramento de um processo-filho]{.marked}
 2. Quando um processo passa do estado de execução para o estado de pronto (por exemplo, quando ocorre uma interrupção)
 3. Quando um processo passa do estado de espera para o estado de pronto (por exemplo, na conclusão de I/O)
 4. Quando um processo termina
@@ -1617,6 +1627,8 @@ Diferentes algoritmos de scheduling da CPU têm diferentes propriedades, e a esc
 
 ## Algoritmos de Scheduling
 
+\
+
 ### Scheduling "Primeiro-a-Chegar, Primeiro-a-Ser-Atendido"
 
 O algoritmo mais simples de scheduling da CPU é o algoritmo "primeiro-a-chegar, primeiro-a-ser-atendido" (FCFS – first-come, first-served). 
@@ -1626,9 +1638,27 @@ O algoritmo mais simples de scheduling da CPU é o algoritmo "primeiro-a-chegar,
 
 ## Algoritmos de Scheduling
 
+\
+
 ### Scheduling Menor-Job-Primeiro
 
 Esse algoritmo associa a cada processo a duração do próximo pico de CPU do processo. Quando a CPU está disponível, ela é atribuída ao processo que tem o próximo pico de CPU mais curto
+
+## Algoritmos de Scheduling
+
+\
+
+### Scheduling por Prioridades
+
+## Algoritmos de Scheduling
+
+\
+
+### Scheduling Round-Robin
+
+
+
+
 
 # Instalação e Configuração do Linux
 
@@ -1698,12 +1728,13 @@ cmatrix
 Comandos que podem ser executados para solucionar erros de instalação
 
 ```{.bash}
-sudo apt install cmatrix --fix-missing
+sudo apt install <nome do pacote> --fix-missing
 ```
 
 ```{.bash}
 sudo apt update
 sudo apt --fix-broken install
+sudo apt install <nome do pacote>
 ```
 
 ## Alguns programas úteis
