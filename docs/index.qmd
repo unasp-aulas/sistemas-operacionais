@@ -643,6 +643,61 @@ ln -s myfile1 myfile2
 
 ```
 
+## Alguns comandos úteis
+
+\
+
+```{.bash code-line-numbers="false"}
+# Acessar o manual de um comando
+man mkdir
+
+# Criar um novo diretório
+mkdir novapasta
+
+# Criar um novo diretório contendo outro diretório (pasta)
+mkdir -p novapasta/outrapasta
+
+# Criar um diretório com alguma permissão definida
+mkdir -m 700 novapasta
+
+# Remover um diretório vazio
+rmdir novapasta
+```
+
+## Alguns comandos úteis
+
+\
+
+```{.bash code-line-numbers="false"}
+# Criar um arquivo em branco
+touch meuarquivo.txt
+
+# Criar um arquivo com algum conteúdo
+echo "Ola mundo!" > meuarquivo.txt
+
+# Adicionar uma nova linha a um arquivo existente
+echo "Nova linha" >> meuarquivo.txt 
+
+# Remover um arquivo
+rm meuarquivo.txt
+
+# Remover um diretório
+rm -r novapasta
+```
+
+## Alguns comandos úteis
+
+```{.bash code-line-numbers="false"}
+# Mover arquivos
+mv meuarquivo.txt /outrapasta
+
+# Renomear arquivos
+mv meuarquivo.txt novonome.txt
+
+# Copiar arquivos
+cp meuarquivo.txt copiadoarquivo.txt
+```
+
 ## Chamadas de sistema para gerenciamento diversos
 
 \
@@ -660,6 +715,7 @@ ln -s myfile1 myfile2
 ```{.bash code-line-numbers="false"}
 # Alterar um diretório (geralmente se usa cd)
 chdir <diretório existente>
+cd <diretório existente>
 
 # Define a proteção de um arquivo
 chmod 700 myfile
