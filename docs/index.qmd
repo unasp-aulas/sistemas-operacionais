@@ -1706,11 +1706,46 @@ Esse algoritmo associa a cada processo a duração do próximo pico de CPU do pr
 
 ### Scheduling por Prioridades
 
+Uma prioridade é associada a cada processo, e a CPU é alocada ao processo com a prioridade mais alta. Processos com prioridades iguais são organizados no schedule em ordem FCFS. O algoritmo SJF é simplesmente um algoritmo por prioridades em que a prioridade (p) é o inverso do próximo pico de CPU (previsto). Quanto maior o pico de CPU, menor a prioridade, e vice-versa.
+
 ## Algoritmos de Scheduling
 
 \
 
 ### Scheduling Round-Robin
+
+O scheduler da CPU seleciona o primeiro processo da fila de prontos, define um timer com interrupção após 1 quantum de tempo e despacha o processo.
+
+Portanto, uma entre duas coisas ocorrerá. O processo pode ter um pico de CPU menor do que 1 quantum de tempo. Nesse caso, o próprio processo liberará a CPU voluntariamente. O scheduler passará então para o próximo processo na fila de prontos. Se o pico de CPU do processo em execução corrente for maior do que 1 quantum de tempo, o timer será desligado e causará uma interrupção para o sistema operacional. Uma mudança de contexto será executada e o processo será inserido na cauda da fila de prontos. O scheduler da CPU selecionará então o próximo processo na fila de prontos.
+
+
+# Gerenciamento de memória
+
+## Gerenciamento de memória
+
+\
+
+> *O que todo programador gostaria é de uma memória privada, infinitamente grande e rápida, que fosse não volátil também, isto é, não perdesse seus conteúdos quando faltasse energia elétrica. Aproveitando o ensejo, por que não torná-la barata, também? Infelizmente, a tecnologia ainda não produz essas memórias no momento.*
+
+## Hierarquia de memória
+
+\
+
+Ao longo dos anos, as pessoas descobriram o conceito de [hierarquia de memórias]{.blue}, em que os computadores têm alguns megabytes de memória cache volátil, cara e muito rápida, alguns gigabytes de memória principal volátil de velocidade e custo médios, e alguns terabytes de armazenamento em disco em estado sólido ou magnético não volátil, barato e lento, sem mencionar o armazenamento removível, com DVDs e dispositivos USB. [É função do sistema operacional abstrair essa hierarquia em um modelo útil e então gerenciar a abstração.]{.marked}
+
+*A parte do sistema operacional que gerencia (parte da) hierarquia de memórias é chamada de gerenciador de memória.*
+
+## A noção de um espaço de endereçamento
+
+\
+
+Dois problemas têm de ser solucionados para permitir que múltiplas aplicações estejam na memória ao mesmo tempo sem interferir umas com as outras: [proteção e realocação.]{.marked}
+
+\
+
+Uma solução foi inventar uma nova abstração para a memória: o espaço de endereçamento. Da mesma forma que o conceito de processo cria uma espécie de CPU abstrata para executar os programas, [o espaço de endereçamento cria uma espécie de memória abstrata para abrigá-los.]{.marked} [Um espaço de endereçamento é o conjunto de endereços que um processo pode usar para endereçar a memória.]{.blue} [Cada processo tem seu próprio espaço de endereçamento, independente daqueles pertencentes a outros processos]{.marked} (exceto em algumas circunstâncias especiais onde os processos querem compartilhar seus espaços de endereçamento).
+
+
 
 
 
