@@ -687,6 +687,8 @@ rm -r novapasta
 
 ## Alguns comandos úteis
 
+\
+
 ```{.bash code-line-numbers="false"}
 # Mover arquivos
 mv meuarquivo.txt /outrapasta
@@ -696,6 +698,9 @@ mv meuarquivo.txt novonome.txt
 
 # Copiar arquivos
 cp meuarquivo.txt copiadoarquivo.txt
+
+# Copiar diretórios
+cp -r meudiretorio outro/lugar
 ```
 
 ## Chamadas de sistema para gerenciamento diversos
@@ -795,7 +800,7 @@ ls -l myfile
 - Cada processo tem a ilusão de que possui seu próprio sistema operacional.
 - Exemplos incluem máquinas virtuais como VMware, VirtualBox e Hyper-V.
 
-![(a) Um hipervisor de tipo 1. (b) Um hipervisor de tipo 2 puro. (c) Um hipervisor de tipo 2 na prática. Uma discussão sobre a diferença entre hipervisors 1 e 2: <https://aws.amazon.com/pt/compare/the-difference-between-type-1-and-type-2-hypervisors/>](images/tanenbaum-01-29.jpg){height="250"}
+![(a) Um hipervisor de tipo 1. (b) Um hipervisor de tipo 2 na prática. Uma discussão sobre a diferença entre hipervisors 1 e 2: <https://aws.amazon.com/pt/compare/the-difference-between-type-1-and-type-2-hypervisors/>](images/tanenbaum-01-29.png){height="250"}
 
 # Gerenciamento de processos
 
@@ -817,8 +822,8 @@ ls -l myfile
 Início da execução do programa:
 
 1. O [Contador de Programa]{.blue} contém 0x00000000 (digamos que este seja o endereço de início do programa na memória).
-2. A instrução codificada é buscada na memória e colocada no [Registrador de Instruções]{.blue}.
-3. A instrução é decodificada e executada.
+2. A instrução é buscada na memória e colocada no [Registrador de Instruções]{.blue}.
+3. A instrução é executada.
 4. Agora é hora de avançar para o próximo endereço de instrução, e seguir o mesmo processo (ciclo de intrução)
 :::
 ::::
@@ -1209,6 +1214,7 @@ Colocando a questão em outras palavras, o que precisamos é de [exclusão mútu
 \
 
 [Quatro condições são estabelecidas]{.marked} para se chegar a uma boa solução de corridas:
+
 1. Dois processos jamais podem estar simultaneamente dentro de suas regiões críticas.
 2. Nenhuma suposição pode ser feita a respeito de velocidades ou do número de CPUs.
 3. Nenhum processo executando fora de sua região crítica pode bloquear qualquer processo.
@@ -1274,7 +1280,7 @@ Digamos que em algum momento os dois processos estão em suas regiões não crí
 
 ### Solução de Peterson
 
-Antes de usar as variáveis compartilhadas (isto é, antes de entrar na região crítica), cada processo chama enter_region com seu próprio número de processo, 0 ou 1, como parâmetro. Essa chamada fará que ele espere, se necessário, até que seja seguro entrar. Após haver terminado com as variáveis compartilhadas, o processo chama leave_region para indicar que ele terminou e para permitir que outros processos entrem, se assim desejarem.
+Antes de usar as variáveis compartilhadas (isto é, antes de entrar na região crítica), cada processo chama `enter_region` com seu próprio número de processo, 0 ou 1, como parâmetro. Essa chamada fará que ele espere, se necessário, até que seja seguro entrar. Após haver terminado com as variáveis compartilhadas, o processo chama `leave_region` para indicar que ele terminou e para permitir que outros processos entrem, se assim desejarem.
 
 ## Exclusão mútua com espera ocupada
 
