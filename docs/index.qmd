@@ -1724,7 +1724,6 @@ O scheduler da CPU seleciona o primeiro processo da fila de prontos, define um t
 
 Portanto, uma entre duas coisas ocorrerá. O processo pode ter um pico de CPU menor do que 1 quantum de tempo. Nesse caso, o próprio processo liberará a CPU voluntariamente. O scheduler passará então para o próximo processo na fila de prontos. Se o pico de CPU do processo em execução corrente for maior do que 1 quantum de tempo, o timer será desligado e causará uma interrupção para o sistema operacional. Uma mudança de contexto será executada e o processo será inserido na cauda da fila de prontos. O scheduler da CPU selecionará então o próximo processo na fila de prontos.
 
-
 # Gerenciamento de memória
 
 ## Gerenciamento de memória
@@ -1751,11 +1750,71 @@ Dois problemas têm de ser solucionados para permitir que múltiplas aplicaçõe
 
 Uma solução foi inventar uma nova abstração para a memória: o espaço de endereçamento. Da mesma forma que o conceito de processo cria uma espécie de CPU abstrata para executar os programas, [o espaço de endereçamento cria uma espécie de memória abstrata para abrigá-los.]{.marked} [Um espaço de endereçamento é o conjunto de endereços que um processo pode usar para endereçar a memória.]{.blue} [Cada processo tem seu próprio espaço de endereçamento, independente daqueles pertencentes a outros processos]{.marked} (exceto em algumas circunstâncias especiais onde os processos querem compartilhar seus espaços de endereçamento).
 
+## Registradores base e registradores limite
 
+\
 
+:::: columns
+::: {.column width="33%"}
+Quando esses registradores são usados, os programas são carregados em posições de memória consecutivas sempre que haja espaço e sem realocação durante o carregamento. 
+:::
+::: {.column width="33%"}
+Usar registradores base e limite é uma maneira fácil de dar a cada processo seu próprio espaço de endereçamento privado, pois cada endereço de memória gerado automaticamente tem o conteúdo do registrador base adicionado a ele antes de ser enviado para a memória.
+:::
+::: {.column width="33%"}
+Desvantagem:  necessidade de realizar uma adição e uma comparação em cada referência de memória.
+:::
+::::
 
+## Registradores base e registradores limite
 
+\
 
+:::: columns
+::: {.column}
+<center>
+![(a) Um programa de 16 KB. (b) Outro programa de 16 KB. (c) Os dois programas carregados consecutivamente na memória.](images/tanenbaum-03-02.png){width="85%"}
+</center>
+
+:::
+
+::: {.column}
+<center>
+![Registradores base ou limite podem ser usados para dar a cada processo um espaço de endereçamento em separado.](images/tanenbaum-03-03.png){width="65%"}
+</center>
+
+:::
+::::
+
+## Troca de processos (Swapping) 
+
+\
+
+:::: columns
+::: {.column width="33%"}
+Estratégia simples para lidar com a sobrecarga de memória que consiste em trazer cada processo em sua totalidade, executá-lo por um tempo e então colocá-lo de volta no disco. 
+:::
+::: {.column width="33%"}
+Processos ociosos estão armazenados em disco em sua maior parte, portanto não ocupam qualquer memória quando não estão sendo executados. 
+:::
+::: {.column width="33%"}
+Quando as trocas de processos criam múltiplos espaços na memória, é possível combiná-los em um grande espaço movendo todos os processos para baixo, o máximo possível. Essa técnica é conhecida como *compactação de memória*.
+:::
+::::
+
+## Troca de processos (Swapping) 
+
+\
+
+Mudanças na alocação de memória à medida que processos entram nela e saem dela. As regiões sombreadas são regiões não utilizadas da memória:
+
+\
+
+<center>
+![](images/tanenbaum-03-04.png)
+</center>
+
+<!-- Configuração do Linux -->
 
 # Instalação e Configuração do Linux
 
@@ -1849,13 +1908,129 @@ Para instalar todos eles de uma vez
 sudo apt install neovim g++ tmux wget
 ```
 
+# Usando vi/vim/neovim
 
+## Comandos básicos do neovim
 
+\
 
+- Para instalar: `sudo apt install neovim`
+- Para iniciar digite `nvim`
 
+<center>
+![](images/nvim-01.png){width="50%"}
+</center>
 
+## Comandos básicos do neovim
 
+\
 
+Para iniciar no modo de `-- INSERÇÃO --` ou `-- INSERT --`, clique na letra `i`
+
+<center>
+![](images/nvim-02.png){width="50%"}
+</center>
+
+Assim será possível digitar
+
+## Comandos básicos do neovim
+
+\
+
+[-- Após digitar, você deve sair do modo `-- INSERÇÃO --` clicando em `ESC`]{.fragment fragment-index=1}
+
+[-- Para salvar o arquivo digite `:` e em seguida `w script.sh`]{.fragment fragment-index=2}
+
+[-- Clicando na tecla `ENTER` o arquivo está salvo com o nome `script.sh`]{.fragment fragment-index=3}
+
+[-- Para sair é só digitar `:`, depois `q` e então a tecla `ENTER`]{.fragment fragment-index=4}
+
+::: {.fragment fragment-index=1}
+<center>
+![](images/nvim-03.png){.absolute top=450 left=500 width="40%"}
+</center>
+
+:::
+
+::: {.fragment fragment-index=2}
+<center>
+![](images/nvim-04.png){.absolute top=450 left=500 width="40%"}
+</center>
+
+:::
+
+::: {.fragment fragment-index=3}
+<center>
+![](images/nvim-05.png){.absolute top=450 left=500 width="40%"}
+</center>
+
+:::
+
+::: {.fragment fragment-index=4}
+<center>
+![](images/nvim-06.png){.absolute top=450 left=500 width="40%"}
+</center>
+
+:::
+
+## Comandos básicos do neovim
+
+\
+
+![](images/vim-graphical-cheat-sheet.webp)
+
+# Usando tmux
+
+## Comandos básicos do tmux
+
+\
+
+:::: columns
+::: {.column width="60%"}
+<center>
+![](images/tmux-cheat-sheet.png)
+</center>
+
+:::
+::: {.column width="40%"}
+- Instalar `sudo apt install tmux` e para executar `tmux`
+- Arquivo de configuração `.tmux.conf` pode ser alterado e salvo em `/home/usuario`
+- Exemplo de um arquivo de configuração [aqui](https://gist.githubusercontent.com/th1460/200ee712919f1551340754630daf2c0c/raw/0766c12adefd5e4cf28295213986126db04b632a/.tmux.conf)
+- O prefixo foi alterado para `ctrl + a`
+- A divisão vertical `ctrl + b` e `-`; a divisão horizontal `ctrl + b` e `\`
+:::
+::::
+
+## Comandos básicos do tmux
+
+\
+
+[-- Para dividir a janela horizontalmente com `ctrl + a \`]{.fragment fragment-index=1}
+
+[-- Para dividir a janela verticalmente com `ctrl + a -`]{.fragment fragment-index=2}
+
+[-- Para criar nova janela com `ctrl + a c`]{.fragment fragment-index=3}
+
+::: {.fragment fragment-index=1}
+<center>
+![](images/tmux-01.png){.absolute top=390 left=400 width="50%"}
+</center>
+
+:::
+
+::: {.fragment fragment-index=2}
+<center>
+![](images/tmux-02.png){.absolute top=390 left=400 width="50%"}
+</center>
+
+:::
+
+::: {.fragment fragment-index=3}
+<center>
+![](images/tmux-03.png){.absolute top=390 left=400 width="50%"}
+</center>
+
+:::
 
 
 
