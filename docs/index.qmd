@@ -10,6 +10,8 @@ format:
     width: 1600
     height: 900
     footer: "[github.com/unasp-aulas/sistemas-operacionais](https://github.com/unasp-aulas/sistemas-operacionais)"
+    slide-number: true
+    show-slide-number: all
 html-math-method: mathjax
 code-annotations: below
 self-contained: true
@@ -1812,6 +1814,112 @@ Mudanças na alocação de memória à medida que processos entram nela e saem d
 
 <center>
 ![](images/tanenbaum-03-04.png)
+</center>
+
+
+## Quanta memória deve ser alocada para um processo quando ele é criado ou trocado? {.smaller}
+
+:::: columns
+::: {.column width="60%"}
+- Se os processos são criados com um tamanho fixo que nunca muda, então a alocação é simples: [o sistema operacional aloca exatamente o que é necessário, nem mais nem menos]{.marked}. No entanto, um problema ocorre sempre que um processo tenta crescer. 
+- Se houver um espaço adjacente ao processo, ele poderá ser alocado e o processo [será autorizado a crescer naquele espaço]{.marked}. 
+- Por outro lado, se o processo for adjacente a outro, [aquele que cresce terá de ser movido para um espaço na memória grande o suficiente]{.marked} para ele, ou um ou mais processos terão de ser trocados para criar um espaço grande o suficiente. 
+- Se um processo não puder crescer em memória e a área de troca no disco estiver cheia, [ele terá de ser suspenso até que algum espaço seja liberado]{.marked} (ou ele pode ser morto).
+- [Se o esperado for que a maioria dos processos cresça à medida que são executados, provavelmente seja uma boa ideia alocar um pouco de memória extra sempre que um processo for trocado ou movido]{.marked}, para reduzir a sobrecarga associada com a troca e movimentação dos processos que não cabem mais em sua memória alocada. 
+:::
+::: {.column width="30%"}
+<center>
+![(a) Alocação de espaço para um segmento de dados em expansão. (b) Alocação de espaço para uma pilha e um segmento de dados em expansão.](images/tanenbaum-03-05.png){width="120%"}
+</center>
+
+:::
+::::
+
+## Gerenciamento de memória com mapas de bits ou listas encadeadas
+
+\
+
+<center>
+![(a) Uma parte da memória com cinco processos e três espaços. As marcas indicam as unidades de alocação de memória. As regiões sombreadas (0 no mapa de bits) estão livres. (b) Mapa de bits correspondente. (c) A mesma informação como lista.](images/tanenbaum-03-06.png){width="80%"}
+</center>
+
+## Gerenciamento de memória com listas encadeadas
+
+Uma maneira de controlar o uso da memória é manter uma lista encadeada de espaços livres e de segmentos de memória alocados, onde um segmento contém um processo ou é um espaço vazio entre dois processos.
+
+### Algoritmos:
+- [first fit]{.blue} (procura fazer a menor busca possível);
+- [next fit]{.blue} (uma pequena variação do first fit, exceto por memorizar a posição que se encontra um espaço livre adequado sempre que o encontra);
+- [best fit]{.blue} (faz uma busca em toda a lista, do início ao fim, e escolhe o 	menor espaço livre que seja adequado); 
+- [worst fit]{.blue} (sempre escolhe o maior espaço livre);
+- [quick fit]{.blue} (mantém listas em separado para alguns dos tamanhos mais 	comuns solicitados).
+
+## Memória virtual
+
+\
+
+> *Apesar de os tamanhos das memórias aumentarem depressa, os tamanhos dos softwares estão crescendo muito mais rapidamente.* 
+
+\
+
+Como consequência desses desenvolvimentos, *há uma necessidade de executar programas que são grandes demais para se encaixar na memória e há certamente uma necessidade de ter sistemas que possam dar suporte a múltiplos programas executando em simultâneo*, [cada um deles encaixando-se na memória, mas com todos coletivamente excedendo-a.]{.marked}
+
+## Memória virtual
+
+\
+
+:::: columns
+::: {.column width="33%"}
+> *Método encontrado para passar todo o programa para o computador.*
+:::
+::: {.column width="33%"}
+A ideia básica é que cada programa tem seu próprio espaço de endereçamento, o qual é dividido em blocos chamados de páginas.
+:::
+::: {.column width="33%"}
+Funciona bem em um sistema de multiprogramação, com pedaços e partes de muitos programas na memória simultaneamente. [Enquanto um programa está esperando que partes de si mesmo sejam lidas, a CPU pode ser dada para outro processo.]{.marked}
+:::
+::::
+
+## Paginação {.smaller}
+
+\
+
+> *Paginação é um esquema de gerenciamento de memória pelo qual um computador armazena e recupera dados de um armazenamento secundário para uso na memória principal*
+
+:::: columns
+::: {.column}
+- O espaço de endereçamento virtual consiste em unidades de tamanho fixo chamadas de [páginas]{.blue}.
+- As unidades correspondentes na memória física são chamadas de [quadros de página]{.blue}.
+- [Transferências entre a memória RAM e o disco]{.marked} são sempre em páginas inteiras.
+- A paginação é implementada normalmente por unidades dedicadas de hardware integradas nos processadores [(Memory Management Unit)]{.blue}. O MMU que irá criar os endereços
+:::
+::: {.column}
+![A relação entre endereços virtuais e endereços de memória física é dada pela tabela de páginas. Cada página começa com um múltiplo de 4096 e termina 4095 endereços acima; assim, 4K a 8K na verdade significa 4096-8191 e 8K a 12K significa 8192-12287.](images/tanenbaum-03-09.png){width="60%"}
+:::
+::::
+
+## Tabelas de página
+
+\
+
+> *O objetivo da tabela de páginas é mapear as páginas virtuais em quadros de páginas.*
+
+- Estrutura de uma entrada da tabela de páginas: 
+
+<center>
+![](images/tanenbaum-03-11.png){width="50%"}
+</center>
+
+- O campo mais importante é o Número do quadro de página. Afinal, a meta do mapeamento de páginas é localizar esse valor.
+
+## TLB (Translation Lookaside Buffers) ou memória Associativa
+
+\
+
+> Pequeno dispositivo de hardware para mapear endereços virtuais para endereços físicos sem ter de passar pela tabela de páginas.
+
+<center>
+![](images/tanenbaum-03-12.png){width="40%"}
 </center>
 
 <!-- Configuração do Linux -->
