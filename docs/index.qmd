@@ -1672,20 +1672,17 @@ O tempo que o despachante leva para interromper um processo e iniciar a execuç�
 Diferentes algoritmos de scheduling da CPU têm diferentes propriedades, e a escolha de um algoritmo específico pode favorecer uma classe de processos em vez de outra. Seguem alguns critérios para comparação de algorítmos:
 
 :::: columns
-::: {.column width="20%"}
+::: {.column width="25%"}
 [Utilização da CPU.]{.blue} Queremos manter a CPU tão ocupada quanto possível. [Conceitualmente, a utilização da CPU pode variar de 0 a 100%.]{.marked} Em um sistema real, ela deve variar de 40% (para um sistema pouco carregado) a 90% (para um sistema pesadamente carregado).
 :::
-::: {.column width="20%"}
+::: {.column width="25%"}
 [Throughput.]{.blue} Se a CPU está ocupada executando processos, trabalho está sendo realizado. [Uma medida de trabalho é o número de processos que são concluídos por unidade de tempo, chamado throughput.]{.marked} Para processos longos, essa taxa pode ser de um processo por hora; para transações curtas, ela pode ser de dez processos por segundo.
 :::
-::: {.column width="20%"}
+::: {.column width="25%"}
 [Tempo de turnaround.]{.blue} Do ponto de vista de um processo específico, o critério importante é quanto tempo ele leva para ser executado. [O intervalo entre o momento em que o processo é submetido e o momento de sua conclusão é o tempo de turnaround.]{.marked} O tempo de turnaround é a soma dos períodos gastos em espera para entrar na memória, em espera na fila de prontos, em execução na CPU, e executando I/O.
 :::
-::: {.column width="20%"}
+::: {.column width="25%"}
 [Tempo de espera.]{.blue} O algoritmo de scheduling da CPU não afeta o período de tempo durante o qual um processo é executado ou faz I/O. [Ele afeta somente o período de tempo que um processo gasta esperando na fila de prontos.]{.marked} O tempo de espera é a soma dos períodos gastos em espera na fila de prontos.
-:::
-::: {.column width="20%"}
-[Tempo de resposta.]{.blue} Em um sistema interativo, o tempo de turnaround pode não ser o melhor critério. Com frequência, um processo consegue produzir alguma saída bem mais cedo e pode continuar computando novos resultados enquanto resultados anteriores estão sendo exibidos para o usuário.
 :::
 ::::
 
