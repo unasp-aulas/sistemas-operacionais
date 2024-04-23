@@ -1919,6 +1919,93 @@ Funciona bem em um sistema de multiprogramação, com pedaços e partes de muito
 ![](images/tanenbaum-03-12.png){width="40%"}
 </center>
 
+## Substituição de páginas {.smaller}
+
+\
+
+:::: columns
+::: {.column}
+> [Quando ocorre uma falta de página, o sistema operacional tem de escolher uma página para remover da memória]{.marked} a fim de abrir espaço para a que está chegando.
+
+- Se a página a ser removida foi modificada enquanto estava na memória, ela precisa ser reescrita para o disco a fim de atualizar a cópia em disco.
+
+- Se, no entanto, ela não tiver sido modificada (por exemplo, ela contém uma página de código), a cópia em disco já está atualizada, portanto não é preciso reescrevê-la.
+Assim a página a ser lida simplesmente sobrescreve a página que está sendo removida. 
+:::
+::: {.column}
+- Embora seja possível escolher uma página ao acaso para ser descartada a cada falta de página, [o desempenho do sistema será muito melhor se for escolhida uma página que não é intensamente usada.]{.marked}
+- Se uma página intensamente usada for removida, ela provavelmente terá de ser trazida logo de volta, resultando em um custo extra. Muitos trabalhos, tanto teóricos quanto experimentais, têm sido feitos sobre o assunto dos algoritmos de substituição de páginas.
+:::
+::::
+
+# Sistemas de Arquivos
+
+## Sistemas de Arquivos
+
+\
+
+> Arquivos são gerenciados pelo sistema operacional. Como um todo, aquela parte do sistema operacional lidando com arquivos é conhecida como sistema de arquivos. 
+
+\
+
+*Um arquivo fornece uma maneira para armazenar informações sobre o disco e lê-las depois. Isso deve ser feito de tal modo que isole o usuário dos detalhes de como e onde as informações estão armazenadas.*
+
+## Nomeação de Arquivos {.smaller}
+
+\
+
+> Quando um processo cria um arquivo, ele lhe dá um nome. Quando o processo é concluído, o arquivo continua a existir e pode ser acessado por outros processos usando o seu nome.
+
+:::: columns
+::: {.column width="25%"}
+As regras para a nomeação de arquivos variam de sistema para sistema, mas todos os sistemas operacionais atuais permitem cadeias de uma a oito letras como nomes de arquivos legais. Dígitos e caracteres especiais também são frequentemente permitidos.
+:::
+::: {.column width="25%"}
+Alguns sistemas de arquivos distinguem entre letras maiúsculas e minúsculas. O UNIX faz essa distinção; o MS-DOS, não. 
+:::
+::: {.column width="25%"}
+Um sistema UNIX pode ter todos os arquivos a seguir como três arquivos distintos: maria, Maria e MARIA. No MS-DOS, todos esses nomes referem-se ao mesmo arquivo.
+:::
+::: {.column width="25%"}
+Muitos sistemas operacionais aceitam nomes de arquivos de duas partes, com as partes separadas por um ponto, como em prog.c. A parte que vem depois do ponto é a extensão do arquivo.
+:::
+::::
+
+## Tipos de arquivos
+
+\
+
+> O UNIX e o Windows, por exemplo, apresentam arquivos regulares e diretórios. O UNIX também tem arquivos especiais de caracteres e blocos. 
+
+- Arquivos regulares são aqueles que contêm informações do usuário. 
+- Diretórios são arquivos do sistema para manter a estrutura do sistema de arquivos.
+- Arquivos especiais de caracteres são relacionados com entrada/saída e usados para modelar dispositivos de E/S seriais como terminais, impressoras e redes.
+- Arquivos especiais de blocos são usados para modelar discos.
+
+## Tipos de arquivos
+
+\
+
+> Arquivos regulares geralmente são arquivos ASCII ou arquivos binários. Arquivos ASCII consistem de linhas de texto.
+
+- A grande vantagem dos arquivos ASCII é que eles podem ser exibidos e impressos como são e editados com qualquer editor de texto. Além disso, se grandes números de programas usam arquivos ASCII para entrada e saída, é fácil conectar a saída de um programa com a entrada de outro, como em pipelines do interpretador de comandos (shell)
+- Outros arquivos são binários, o que apenas significa que eles não são arquivos ASCII. Listá-los em uma impressora resultaria em algo completamente incompreensível. Em geral, eles têm alguma estrutura interna conhecida pelos programas que os usam.
+
+## Atributos de arquivos
+
+\
+
+:::: columns
+::: {.column width="40%"}
+Todo arquivo possui um nome e sua data. Além disso, os sistemas operacionais associam outras informações com os arquivos, como data e horário em que foi modificado pela última vez, e tamanho do arquivo. Esses itens extras são atributos do arquivo ou metadados.
+:::
+::: {.column width="60%"}
+<center>
+![Alguns possíveis atributos de arquivos](images/tanenbaum-04-04.png){width="70%"}
+</center>
+:::
+::::
+
 <!-- Configuração do Linux -->
 
 # Instalação e Configuração do Linux
