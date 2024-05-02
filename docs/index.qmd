@@ -1631,7 +1631,7 @@ O sucesso do scheduling da CPU depende de uma propriedade observada nos processo
 
 Sempre que a CPU se torna ociosa, o sistema operacional deve selecionar um dos processos na fila de prontos para ser executado. O processo de seleção é realizado pelo scheduler de curto prazo, ou scheduler da CPU. O scheduler seleciona um processo entre os processos na memória que estão prontos para execução e aloca a CPU a esse processo.
 
-## Scheduling com Preempção
+## Scheduling com Preempção (interrupção forçada de um processo)
 
 \
 
@@ -2005,6 +2005,35 @@ Todo arquivo possui um nome e sua data. Além disso, os sistemas operacionais as
 </center>
 :::
 ::::
+
+## Operações com arquivos
+
+\
+
+1. Create `touch` ou `echo 'algum texto' > arquivo.txt`
+2. Delete `rm arquivo.txt`
+3. Open
+4. Close
+5. Read
+6. Write
+7. Append `echo 'algum outro texto' >> arquivo.txt`
+8. Get attributes
+9. Set attributes `chmod 640 arquivo.txt`
+10. Rename `mv antigo novo`
+
+## Diretórios
+
+\
+
+> Para controlar os arquivos, sistemas de arquivos normalmente têm diretórios ou pastas, que são em si arquivos. Nesta seção discutiremos diretórios, sua organização, suas propriedades e as operações que podem ser realizadas por eles.
+
+\
+
+A capacidade dos usuários de criarem um número arbitrário de subdiretórios proporciona uma ferramenta de estruturação poderosa para eles organizarem o seu trabalho. Por essa razão, quase todos os sistemas de arquivos modernos são organizados dessa maneira.
+
+## Operações com diretórios
+
+
 
 <!-- Configuração do Linux -->
 
