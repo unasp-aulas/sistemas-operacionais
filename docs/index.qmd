@@ -1669,6 +1669,8 @@ O tempo que o despachante leva para interromper um processo e iniciar a execuç�
 
 ## Critérios de Scheduling {.smaller}
 
+\
+
 Diferentes algoritmos de scheduling da CPU têm diferentes propriedades, e a escolha de um algoritmo específico pode favorecer uma classe de processos em vez de outra. Seguem alguns critérios para comparação de algorítmos:
 
 :::: columns
@@ -1755,7 +1757,7 @@ Uma solução foi inventar uma nova abstração para a memória: o espaço de en
 
 :::: columns
 ::: {.column width="33%"}
-Quando esses registradores são usados, os programas são carregados em posições de memória consecutivas sempre que haja espaço e sem realocação durante o carregamento. 
+Quando esses registradores são usados, os programas são carregados em posições de memória consecutivas sempre que haja espaço e sem realocação durante o carregamento. [Quando um processo é executado, o registrador base é carregado com o endereço físico onde seu programa começa na memória e o registrador limite é carregado com o comprimento do programa.]{.marked}
 :::
 ::: {.column width="33%"}
 Usar registradores base e limite é uma maneira fácil de dar a cada processo seu próprio espaço de endereçamento privado, pois cada endereço de memória gerado automaticamente tem o conteúdo do registrador base adicionado a ele antes de ser enviado para a memória.
@@ -1779,7 +1781,7 @@ Desvantagem:  necessidade de realizar uma adição e uma comparação em cada re
 
 ::: {.column}
 <center>
-![Registradores base ou limite podem ser usados para dar a cada processo um espaço de endereçamento em separado.](images/tanenbaum-03-03.png){width="65%"}
+![Registradores base (endereço físico onde seu programa começa) ou limite (comprimento do programa) podem ser usados para dar a cada processo um espaço de endereçamento em separado.](images/tanenbaum-03-03.png){width="65%"}
 </center>
 
 :::
@@ -2033,7 +2035,46 @@ A capacidade dos usuários de criarem um número arbitrário de subdiretórios p
 
 ## Operações com diretórios
 
+\
 
+1. Create `mkdir pasta`
+2. Delete `rmdir pasta`
+3. Opendir
+4. Closedir
+5. Readdir
+6. Rename `mv antigo novo`
+7. Link `link arquivo nome_link`
+8. Unlink `unlink nome_link`
+
+## Gerenciamento e otimização de sistemas de arquivos
+
+\
+
+> O gerenciamento de espaço de disco é uma preocupação importante para os projetistas de sistemas de arquivos. [Duas estratégias gerais são possíveis para armazenar um arquivo de n bytes: ou são alocados n bytes consecutivos de espaço, ou o arquivo é dividido em uma série de blocos]{.marked} (não necessariamente) contíguos. 
+
+\
+
+Como vimos, [armazenar um arquivo como uma sequência contígua de bytes tem o problema óbvio de que se um arquivo crescer, ele talvez tenha de ser movido dentro do disco. O mesmo problema ocorre para segmentos na memória, exceto que mover um segmento na memória é uma operação relativamente rápida em comparação com mover um arquivo]{.marked} de uma posição no disco para outra.
+
+## Gerenciamento e otimização de sistemas de arquivos
+
+\
+
+*Feita a opção de armazenar arquivos em blocos de tamanho fixo, devemos decidir qual tamanho o bloco terá.*
+
+\
+
+- [Ter um tamanho de bloco grande]{.marked} significa que todos os arquivos, mesmo um de 1 byte, ocuparão um bloco inteiro. Também significa que arquivos pequenos desperdiçam uma grande quantidade de espaço de disco.
+- Por outro lado, [um tamanho de bloco pequeno]{.marked} significa que a maioria dos arquivos ocupará múltiplos blocos e, desse modo, precisará de múltiplas buscas e atrasos rotacionais para lê-los, reduzindo o desempenho. 
+- [Então, se a unidade de alocação for grande demais, desperdiçamos espaço; se ela for pequena demais, desperdiçamos tempo.]{.marked}
+
+## Monitoramento dos blocos livres
+
+\
+
+<center>
+![(a) Armazenamento da lista de blocos livres em uma lista encadeada. (b) Um mapa de bits.](images/tanenbaum-04-22.png){width="50%"}
+</center>
 
 <!-- Configuração do Linux -->
 
