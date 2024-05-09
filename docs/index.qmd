@@ -1990,6 +1990,7 @@ Muitos sistemas operacionais aceitam nomes de arquivos de duas partes, com as pa
 
 > Arquivos regulares geralmente são arquivos ASCII ou arquivos binários. Arquivos ASCII consistem de linhas de texto.
 
+- [ASCII]{.blue}: Código Padrão Americano para o Intercâmbio de Informação é um sistema de representação de letras, algarismos e sinais de pontuação e de controle
 - A grande vantagem dos arquivos ASCII é que eles podem ser exibidos e impressos como são e editados com qualquer editor de texto. Além disso, se grandes números de programas usam arquivos ASCII para entrada e saída, é fácil conectar a saída de um programa com a entrada de outro, como em pipelines do interpretador de comandos (shell)
 - Outros arquivos são binários, o que apenas significa que eles não são arquivos ASCII. Listá-los em uma impressora resultaria em algo completamente incompreensível. Em geral, eles têm alguma estrutura interna conhecida pelos programas que os usam.
 
@@ -2072,9 +2073,16 @@ Como vimos, [armazenar um arquivo como uma sequência contígua de bytes tem o p
 
 \
 
+:::: columns
+::: {.column width="30%"} 
+Uma lista encadeada de blocos de disco, com cada bloco contendo tantos números de blocos livres de disco quantos couberem nele (a).
+:::
+::: {.column width="70%"}
 <center>
-![(a) Armazenamento da lista de blocos livres em uma lista encadeada. (b) Um mapa de bits.](images/tanenbaum-04-22.png){width="50%"}
+![(a) Armazenamento da lista de blocos livres em uma lista encadeada. (b) Um mapa de bits.](images/tanenbaum-04-22.png){width="80%"}
 </center>
+:::
+::::
 
 <!-- Configuração do Linux -->
 
