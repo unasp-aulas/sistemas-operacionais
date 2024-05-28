@@ -2084,6 +2084,106 @@ Uma lista encadeada de blocos de disco, com cada bloco contendo tantos números 
 :::
 ::::
 
+# Sistemas de I/O
+
+## Sistemas de I/O
+
+\
+
+> *As duas tarefas principais de um computador são I/O e processamento. Em muitos casos, a principal tarefa é o I/O, e o processamento é meramente incidental. Por exemplo, quando navegamos em uma página da web ou editamos um arquivo, nosso interesse imediato é ler ou dar entrada em alguma informação, e não computar uma resposta.*
+
+## Hardware de I/O
+
+\
+
+:::: columns
+::: {.column}
+Os computadores operam muitos tipos de dispositivos. [A maioria enquadra-se nas categorias gerais de dispositivos de armazenamento (discos, fitas), dispositivos de transmissão (conexões de rede, Bluetooth) e dispositivos de interface humana (tela, teclado, mouse, entrada e saída de áudio).]{.marked} *Outros dispositivos são mais especializados, como os envolvidos na pilotagem de um jato.*
+:::
+::: {.column}
+Nessas aeronaves, uma pessoa fornece entradas para o computador de voo por meio de um joystick e de pedais, e o computador envia comandos de saída que fazem os motores acionarem os lemes, os flaps e o combustível para as máquinas. *Apesar da incrível variedade de dispositivos de I/O, no entanto, precisamos apenas de alguns conceitos para entender como eles são conectados e como o software pode controlar o hardware.*
+:::
+::::
+
+## Hardware de I/O
+
+\
+
+:::: columns
+::: {.column}
+Um dispositivo comunica-se com um sistema de computação enviando sinais por um cabo ou até mesmo através do ar. O dispositivo se comunica com a máquina por um ponto de conexão, ou porta — por exemplo, uma porta serial. *Quando os dispositivos compartilham um conjunto de fios, a conexão é chamada de [bus]{.blue}*. [Um bus é um conjunto de fios e um protocolo rigidamente definido que especifica um conjunto de mensagens que podem ser enviadas nos fios.]{.marked}
+:::
+::: {.column}
+Em termos de eletrônica, as mensagens são transmitidas por padrões de voltagens elétricas aplicados aos fios em intervalos de tempo definidos. Quando o dispositivo A tem um cabo que se conecta ao dispositivo B, o dispositivo B tem um cabo que se conecta ao dispositivo C, e o dispositivo C se conecta a uma porta no computador, essa configuração é chamada de cadeia margarida. Uma cadeia margarida opera usualmente como um bus.
+:::
+::::
+
+## Hardware de I/O
+
+\
+
+:::: columns
+::: {.column}
+Os buses são amplamente usados na arquitetura de computadores e variam em seus métodos de sinalização, em velocidade, no throughput (número de processos executados por unidade de tempo) e nos métodos de conexão. Uma estrutura típica de bus de PC é mostrada na figura.
+
+\
+
+<center>
+bus=barramento
+</center>
+:::
+::: {.column}
+<center>
+![Uma estrutura típica de bus de PC.](images/silberschatz-13-01.png){width="90%"}
+</center>
+:::
+::::
+
+## Hardware de I/O
+
+\
+
+*Como o processador pode fornecer comandos e dados a um controlador para realizar uma transferência de I/O?*
+
+:::: columns
+::: {.column width="33%"}
+Uma resposta resumida é que o controlador tem um ou mais registradores para dados e sinais de controle. O processador comunica-se com o controlador lendo e gravando padrões de bits nos seus registradores. 
+:::
+::: {.column width="33%"}
+Uma forma pela qual essa comunicação pode ocorrer é através do uso de instruções de I/O especiais que determinam a transferência de um byte ou palavra para um endereço de porta de I/O.
+:::
+::: {.column width="33%"}
+A instrução de I/O dispara linhas de bus para selecionar o dispositivo apropriado e mover bits para dentro e para fora de um registrador de dispositivo. 
+:::
+::::
+
+## Hardware de I/O
+
+\
+
+*Alternativamente, o controlador do dispositivo pode suportar I/O mapeado para a memória.*
+
+\
+
+Nesse caso, os registradores de controle do dispositivo são mapeados para o espaço de endereçamento do processador. A CPU executa solicitações de I/O usando as instruções-padrão de transferência de dados para ler e gravar os registradores de controle de dispositivos em suas locações mapeadas na memória física.
+
+## Interface de I/O da Aplicação
+
+\
+
+:::: columns
+::: {.column}
+A finalidade da camada do driver de dispositivos é ocultar, do subsistema de I/O do kernel, as diferenças entre controladores de dispositivos, de modo semelhante a como as chamadas de sistema de I/O encapsulam o comportamento de dispositivos em algumas classes genéricas que ocultam, dos aplicativos, as diferenças de hardware.
+:::
+::: {.column}
+![Uma estrutura de I/O do kernel.](images/silberschatz-13-06.png)
+:::
+::::
+
+\
+
+Infelizmente para os fabricantes de hardware de dispositivos, cada tipo de sistema operacional tem seus próprios padrões para a interface dos drivers de dispositivos.
+
 <!-- Configuração do Linux -->
 
 # Instalação e Configuração do Linux
@@ -2301,6 +2401,93 @@ Assim será possível digitar
 </center>
 
 :::
+
+# Containers (Docker)
+
+> Um container do Docker é um ambiente de runtime com todos os componentes necessários, como código, dependências e bibliotecas, necessários para executar o código da aplicação sem usar dependências da máquina host.
+
+\
+
+Runtime: *A maioria das linguagens de programação possui algum tipo de sistema de tempo de execução que fornece um ambiente no qual os programas são executados.*
+
+## [Como o Docker funciona?](https://www.redhat.com/pt-br/topics/containers/what-is-docker)
+
+A tecnologia Docker usa o kernel do Linux e funcionalidades do kernel, como cGroups e namespaces, para segregar processos. Assim, eles podem ser executados de maneira independente. O objetivo dos containers é criar independência: a habilidade de executar diversos processos e apps separadamente para utilizar melhor a infraestrutura e, ao mesmo tempo, manter a segurança que você teria em sistemas separados.
+
+- [cGroups](https://access.redhat.com/documentation/pt-br/red_hat_enterprise_linux/8/html/managing_monitoring_and_updating_the_kernel/using-control-groups-through-a-virtual-file-system_setting-limits-for-applications): Você pode usar control groups (cgroups) para estabelecer limites, priorizar ou controlar o acesso aos recursos de hardware para grupos de processos. Isto permite que você controle granularmente o uso de recursos de aplicações para utilizá-los de forma mais eficiente. 
+- [namespaces](https://lwn.net/Articles/528078/): No contexto dos contêineres, isso significa que usuários e grupos podem ter privilégios para determinadas operações dentro do contêiner sem ter esses privilégios fora do contêiner. (Em outras palavras, o conjunto de capacidades de um processo para operações dentro de um namespace de usuário pode ser bem diferente de seu conjunto de capacidades no sistema host.)
+
+## *Puxar* uma imagem de um registro
+
+> Um registro (registry) de contêiner é um repositório — ou coleção de repositórios — usado para armazenar e acessar imagens de container.
+
+\
+
+Os registros de containeres economizam um tempo valioso dos desenvolvedores na criação e entrega de aplicativos nativos da nuvem, agindo como intermediários para o compartilhamento de imagens de contêineres entre sistemas.
+
+```{.bash}
+docker pull alpine
+```
+
+## Executar um container
+
+Para processos interativos (como um shell), você deve usar os parâmetros `-i -t` juntos para alocar um `tty` (terminal) para o container.
+
+```{.bash}
+docker run -it alpine
+```
+
+Site oficial da distribuição Alpine Linux: <https://www.alpinelinux.org/>
+
+- Gerenciador de pacotes (`apk`)
+- Para instalar `apk add cmatrix`
+
+## Imagens com programas já configurados
+
+### Python com um Debian mínimo
+
+Para puxar a imagem
+
+```{.bash}
+docker pull python:3.12.3-slim-bullseye
+```
+
+\
+
+Para executar a imagem
+
+```{.bash}
+docker run -it python:3.12.3-slim-bullseye
+```
+
+\
+
+Para abrir o shell deste container seguir estes passos
+
+1. Executar o container: `docker run -it python:3.12.3-slim-bullseye`
+2. Verificar qual o `ID` do container que está em execução: `docker container ls`
+3. Executar o comando para acessar o terminal: `docker exec -it <CONTAINER ID> bash`
+
+## Verificando o tamanho das imagens
+
+\
+
+```{.bash}
+docker image ls
+```
+
+\
+
+```
+REPOSITORY                TAG                   IMAGE ID      CREATED       SIZE
+docker.io/library/alpine  latest                442043f030d3  6 days ago    9.12 MB
+docker.io/library/python  3.12.3-slim-bullseye  d8ed415581d3  7 weeks ago   127 MB
+```
+
+
+
+
+
 
 
 
