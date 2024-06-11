@@ -2484,6 +2484,25 @@ docker.io/library/alpine  latest                442043f030d3  6 days ago    9.12
 docker.io/library/python  3.12.3-slim-bullseye  d8ed415581d3  7 weeks ago   127 MB
 ```
 
+## Criação de um `Dockerfile`
+
+\
+
+> `Dockerfile` nada mais é do que um meio que utilizamos para criar nossas próprias imagens.
+
+```{.bash filename="Dockerfile" code-line-numbers="1|2|3"}
+FROM alpine # utilização de uma imagem base
+RUN apk add cmatrix # execução de comandos na etapa de build
+CMD cmatrix # execução de comandos na etapa de inicialização do container
+```
+
+Outros comandos
+
+- `COPY src src` compiar uma pasta local de nome `src` para dentro da imagem
+- A lista completa poderá ser visualizada aqui <https://docs.docker.com/reference/dockerfile/>
+
+Usar o comando: `docker build -t alpine-new` para recriar a imagem a partir das alterações no `Dockerfile`
+
 
 
 

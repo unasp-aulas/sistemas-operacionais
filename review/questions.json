@@ -1,0 +1,354 @@
+[
+    {
+        "id": 1,
+        "question": "Qual é uma das funções essenciais dos sistemas operacionais?",
+        "options": {
+            "A": "Fornecer uma interface de usuário intuitiva.",
+            "B": "Gerenciar recursos de hardware e software.",
+            "C": "Desenvolver aplicativos de software.",
+            "D": "Manter a segurança da rede."
+        },
+        "answer": "B"
+    },
+    {
+        "id": 2,
+        "question": "Quando múltiplas saídas de impressão estão na fila para serem impressas em uma única impressora, uma decisão tem de ser tomada sobre qual deve ser impressa em seguida. Há um compartilhamento de recursos de que maneira?",
+        "options": {
+            "A": "No tempo",
+            "B": "No espaço",
+            "C": "No tempo e espaço",
+            "D": "Nenhum dos itens anteriores"
+        },
+        "answer": "A"
+    },
+    {
+        "id": 3,
+        "question": "Em vez de os clientes se revezarem, cada um tem direito a uma parte do recurso. Por exemplo, a memória principal é normalmente dividida entre vários programas sendo executados, de modo que cada um pode ser residente ao mesmo tempo (por exemplo, a fim de se revezar usando a CPU). Há um compartilhamento de recursos de que maneira?",
+        "options": {
+            "A": "No tempo",
+            "B": "No espaço",
+            "C": "No tempo e espaço",
+            "D": "Nenhum dos itens anteriores"
+        },
+        "answer": "B"
+    },
+    {
+        "id": 4,
+        "question": "Considere as afirmações: 1. Cada CPU tem um conjunto genérico de instruções que ela consegue executar. Assim, um processador x86 pode facilmente executar programas ARM. 2. As CPUs têm alguns registradores internos para armazenamento de variáveis e resultados temporários. 3. Os resgistradores são importantes por causa da multiplexação de espaço da CPU.",
+        "options": {
+            "A": "Todas as afirmações estão corretas",
+            "B": "Somente as afirmações 1 e 2 estão corretas",
+            "C": "As afirmações 1 e 3 estão incorretas",
+            "D": "Nenhuma das afirmações estão corretas"
+        },
+        "answer": "C"
+    },
+    {
+        "id": 5,
+        "question": "Ordene as memórias de forma decrescente segundo o tempo de acesso",
+        "options": {
+            "A": "Disco magnético>Memória principal>Cache>Registradores",
+            "B": "Registradores>Cache>Memória principal>Disco magnético",
+            "C": "Memória principal>Disco magnético>Cache>Regitradores",
+            "D": "Cache>Regitradores>Memória principal>Disco magnético"
+        },
+        "answer": "A"
+    },
+    {
+        "id": 6,
+        "question": "Ordene as memórias de forma decrescente segundo a capacidade",
+        "options": {
+            "A": "Disco magnético>Memória principal>Cache>Registradores",
+            "B": "Registradores>Cache>Memória principal>Disco magnético",
+            "C": "Memória principal>Disco magnético>Cache>Regitradores",
+            "D": "Cache>Regitradores>Memória principal>Disco magnético"
+        },
+        "answer": "B"
+    },
+    {
+        "id": 7,
+        "question": "Complete a frase: As chamadas de sistema sempre foram o meio pelo qual os programas de espaço do(a) _____ podem acessar os serviços do(a) _____",
+        "options": {
+            "A": "memória/cpu",
+            "B": "endereçamento/memória",
+            "C": "usuário/kernel",
+            "D": "kernel/usuário"
+        },
+        "answer": "C"
+    },
+    {
+        "id": 8,
+        "question": "Qual é o nome da chamada de sistema que suspende a execução do processo pai até a finalização de um processo filho?",
+        "options": {
+            "A": "waitpid",
+            "B": "fork",
+            "C": "execve",
+            "D": "exit"
+        },
+        "answer": "A"
+    },
+    {
+        "id": 9,
+        "question": "Para que serve a chamada de sistema fork?",
+        "options": {
+            "A": "Para iniciar um novo processo filho a partir do processo pai.",
+            "B": "Para suspender a execução do processo pai até que o processo filho termine.",
+            "C": "Para encerrar a execução de um processo filho antes de retornar ao processo pai.",
+            "D": "Para realizar a comunicação entre processos em sistemas operacionais."
+        },
+        "answer": "A"
+    },
+    {
+        "id": 10,
+        "question": "Se eu executar este comando: mkdir -p novapasta/subpasta e em seguida executar outro comando rmdir novapasta, o que irá acotencer?",
+        "options": {
+            "A": "A novapasta e a sua subpasta será removida",
+            "B": "Somente a subpasta será removida",
+            "C": "Haverá um erro porque a novapasta não está vazia",
+            "D": "Haverá um erro porque a subpasta está vazia"
+        },
+        "answer": "C"
+    },
+    {
+        "id": 11,
+        "question": "Qual o comando é utilizado para mover e renomear arquivos?",
+        "options": {
+            "A": "cp",
+            "B": "mv",
+            "C": "mkdir",
+            "D": "rm"
+        },
+        "answer": "B"
+    },
+    {
+        "id": 12,
+        "question": "Para definir a proteção de arquivo -rw-r--r-- qual comando devo utilizar?",
+        "options": {
+            "A": "chmod 700 arquivo",
+            "B": "chmod 640 arquivo",
+            "C": "chmod 644 arquivo",
+            "D": "chmod 540 arquivo"
+        },
+        "answer": "C"
+    },
+    {
+        "id": 13,
+        "question": "O VirtualBox é um exemplo de:",
+        "options": {
+            "A": "Sistema operacional",
+            "B": "Software de virtualização, sendo um hypervisor de tipo 1",
+            "C": "Software de virtualização, sendo um hypervisor de tipo 2",
+            "D": "A letra A e C estão corretas"
+        },
+        "answer": "D"
+    },
+    {
+        "id": 14,
+        "question": "Quais afirmações estão corretas sobre os processos?",
+        "options": {
+            "A": "Um processo é apenas uma instância de um programa em execução",
+            "B": "Cada processo tem seu próprio espaço de endereçamento.",
+            "C": "Um processo contém: contador do programa e registradores",
+            "D": "Todas as afirmações estão corretas"
+        },
+        "answer": "D"
+    },
+    {
+        "id": 15,
+        "question": "Quais afirmações estão corretas sobre os processos?",
+        "options": {
+            "A": "Um processo é apenas uma instância de um programa em execução",
+            "B": "Cada processo tem seu próprio espaço de endereçamento.",
+            "C": "Um processo contém: contador do programa e registradores",
+            "D": "Todas as afirmações estão corretas"
+        },
+        "answer": "D"
+    },
+    {
+        "id": 15,
+        "question": "Qual afirmação está incorreta sobre os processos?",
+        "options": {
+            "A": "Um processo é apenas uma instância de um programa em execução",
+            "B": "Em geral todos os processos compartilham o mesmo espaço de endereçamento",
+            "C": "Um processo contém um contador de programa lógico",
+            "D": "Processos podem ser criados e terminados dinamicamente"
+        },
+        "answer": "B"
+    },
+    {
+        "id": 16,
+        "question": "Qual afirmação está incorreta sobre os processos?",
+        "options": {
+            "A": "Os seus três estados são: execução, pronto e bloqueado",
+            "B": "Saídas normal e por erro são términos voluntários",
+            "C": "Um Erro fatal e um processo ser morto pelo comando kill são términos involuntários",
+            "D": "A não existência do arquivo para ser compilado ao se utilizar o comando g++ foo.cpp, gera um término voluntário"
+        },
+        "answer": "D"
+    },
+    {
+        "id": 17,
+        "question": "Sobre os estados do processso é correto afirmar",
+        "options": {
+            "A": "O escalonador é o responsável por alternar os processos em estados executável e pronto",
+            "B": "O estado pronto é um processo incapaz de ser executado até que algum evento externo aconteça",
+            "C": "O estado bloqueado é um processo executável, mas que está temporariamente parado pelo escalonador",
+            "D": "O escalonador é o responsável por alternar os processos em estados executável e bloqueado"
+        },
+        "answer": "A"
+    },
+    {
+        "id": 18,
+        "question": "Sobre o scheduling ou escalonamento de processos o que é incorreto afirmar?",
+        "options": {
+            "A": "O scheduling de processos é uma técnica utilizada pelos sistemas operacionais para gerenciar a execução de múltiplos processos concorrentes em um único processador.",
+            "B": "O objetivo do scheduling de processos é maximizar a eficiência do processador, garantindo um uso justo dos recursos entre os processos e minimizando o tempo de espera.",
+            "C": "Existem diversos algoritmos de escalonamento de processos, como o First-Come, First-Served (FCFS), Shortest Job Next (SJN), Round Robin (RR), entre outros, cada um com suas próprias características e desempenhos.",
+            "D": "O scheduling de processos não é uma preocupação nos sistemas operacionais modernos, uma vez que todos os processos são executados em paralelo, sem necessidade de coordenação pelo sistema operacional."
+        },
+        "answer": "D"
+    },
+    {
+        "id": 19,
+        "question": "Qual a relação entre o Bloco de Controle de Processo (PCB sigla em inglês) e a mudança de contexto",
+        "options": {
+            "A": "O PCB é uma estrutura de dados temporária que é completamente apagada durante a mudança de contexto, assim o processo escalonado precisar ficar bloqueado para receber o contexto de outro processo",
+            "B": "O PCB é responsável pelo escalonamento do processo e executar a mudança de contexto",
+            "C": "A mudança de contexto ocorre quando o sistema operacional interrompe a execução de um processo para permitir a execução de outro. Durante essa troca, o sistema operacional salva o contexto do processo no PCB",
+            "D": "Estes termos não apresentam nenhuma relação"
+        },
+        "answer": "C"
+    },
+    {
+        "id": 20,
+        "question": "Quando ocorre uma condição de corrida?",
+        "options": {
+            "A": "Quando há um escalonamento de processo e será selecionado quais são os mais rápidos",
+            "B": "Quando dois processos querem acessar a memória compartilhada ao mesmo tempo",
+            "C": "Quando há troca de mensagens entre dois processos",
+            "D": "Quando um processo chega mais rápico em uma região crítica"
+        },
+        "answer": "B"
+    },
+    {
+        "id": 21,
+        "question": "Qual das afirmações está correta quando se fala em evitar as condições de corrida?",
+        "options": {
+            "A": "Proibir mais de um processo de ler e escrever os dados compartilhados",
+            "B": "Em um sistemas com múltiplas CPUs, impedir que o sistema operacional escalone um dos processos",
+            "C": "Exercer a exclusão mútua, quando um processo está usando um arquivo ou variável compartilhados, os outros serão impedidos de realizar a mesma coisa.",
+            "D": "É impossível evitar condições de corrida"
+        },
+        "answer": "C"
+    },
+    {
+        "id": 22,
+        "question": "Quais das afirmações a seguir não é uma condição para se chegar em uma boa solução de corrida?",
+        "options": {
+            "A": "Em nenhum momento, dois processos podem ocupar simultaneamente suas regiões críticas.",
+            "B": "Um processo em execução fora de sua região crítica não pode bloquear nenhum outro processo.",
+            "C": "Nenhum processo deve ser forçado a aguardar indefinidamente para acessar sua região crítica.",
+            "D": "Suposição devem ser feita a respeito de velocidades ou do número de CPUs."
+        },
+        "answer": "D"
+    },
+    {
+        "id": 23,
+        "question": "Em qual critério para se chegar em uma boa solução de corridas, a desabilitação de interrupções falha?",
+        "options": {
+            "A": "Dois processos jamais podem estar simultaneamente dentro de suas regiões críticas.",
+            "B": "Nenhuma suposição pode ser feita a respeito de velocidades ou do número de CPUs.",
+            "C": "Nenhum processo executando fora de sua região crítica pode bloquear qualquer processo.",
+            "D": "Nenhum processo deve ser obrigado a esperar eternamente para entrar em sua região crítica."
+        },
+        "answer": "B"
+    },
+    {
+        "id": 24,
+        "question": "Em qual critério para se chegar em uma boa solução de corridas, a inclusão de uma variável do tipo trava falha?",
+        "options": {
+            "A": "Dois processos jamais podem estar simultaneamente dentro de suas regiões críticas.",
+            "B": "Nenhuma suposição pode ser feita a respeito de velocidades ou do número de CPUs.",
+            "C": "Nenhum processo executando fora de sua região crítica pode bloquear qualquer processo.",
+            "D": "Nenhum processo deve ser obrigado a esperar eternamente para entrar em sua região crítica."
+        },
+        "answer": "A"
+    },
+    {
+        "id": 25,
+        "question": "Qual a melhor solução para evitar as condições de corrida entre dois processos que se comunicam através do compartilhamento de memória?",
+        "options": {
+            "A": "Desabilitação de interrupcões",
+            "B": "Criação de variáveis do tipo trava",
+            "C": "Solução de Peterson",
+            "D": "Alternância explícita"
+        },
+        "answer": "C"
+    },
+    {
+        "id": 26,
+        "question": "Em qual dos casos o processo sofreu uma interrupcão forçada como resultado de uma decisão de scheduling da CPU?",
+        "options": {
+            "A": "Quando um processo passa do estado de execução para o estado de espera por exemplo, como resultado de uma invocação wait para o encerramento de um processo-filho",
+            "B": "Quando um processo passa do estado de execução para o estado de pronto",
+            "C": "Quando o processo recebeu um sinal do comando kill para término",
+            "D": "Quando um processo termina"
+        },
+        "answer": "B"
+    },
+    {
+        "id": 27,
+        "question": "Qual das afirmações a seguir está correta?",
+        "options": {
+            "A": "Quando um processo é executado, o registrador limite é carregado com o endereço físico onde seu programa começa na memória e o registrador base é carregado com o comprimento do programa.",
+            "B": "Usar registradores base e limite é uma maneira fácil de dar a cada processo seu próprio espaço de endereçamento",
+            "C": "Mesmo que um processo não possa crescer em memória e não há um espaço liberado para ele, nunca poderá ser morto",
+            "D": "Alocar memória extra mesmo sabendo que um processo nunca irá precisar de mais"
+        },
+        "answer": "B"
+    },
+    {
+        "id": 28,
+        "question": "Uma forma de lidar com a sobrecarga a movimentação dos processos que não cabem mais em sua memória alocada",
+        "options": {
+            "A": "Alocar um pouco de memória extra sempre que um processo for trocado ou movido",
+            "B": "Reservar exatamente o que é necessário, nem mais nem menos, assim reduz a sobrecarga causada por alocações extras",
+            "C": "Não movimentar o processo e suspendê-lo",
+            "D": "Transferir o processo para a memória cache "
+        },
+        "answer": "A"
+    },
+    {
+        "id": 29,
+        "question": "No gerenciamento de memória, qual algoritmo faz a menor busca possível para a alocação de memória",
+        "options": {
+            "A": "Quick fit",
+            "B": "Best fit",
+            "C": "First fit",
+            "D": "Next fit"
+        },
+        "answer": "C"
+    },
+    {
+        "id": 30,
+        "question": "No gerenciamento de memória, qual algoritmo irá escolher o maior espaço livre",
+        "options": {
+            "A": "Next fit",
+            "B": "Best fit",
+            "C": "Worst fit",
+            "D": "First fit"
+        },
+        "answer": "C"
+    },
+    {
+        "id": 31,
+        "question": "No gerenciamento de memória, qual algoritmo irá escolher o menor espaço livre que seja adequado",
+        "options": {
+            "A": "Next fit",
+            "B": "Best fit",
+            "C": "Worst fit",
+            "D": "First fit"
+        },
+        "answer": "B"
+    }
+]
