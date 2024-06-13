@@ -56,12 +56,12 @@
     },
     {
         "id": 6,
-        "question": "Ordene as memórias de forma decrescente segundo a capacidade",
+        "question": "Ordene as memórias de forma crescente segundo a capacidade",
         "options": {
-            "A": "Disco magnético>Memória principal>Cache>Registradores",
-            "B": "Registradores>Cache>Memória principal>Disco magnético",
-            "C": "Memória principal>Disco magnético>Cache>Regitradores",
-            "D": "Cache>Regitradores>Memória principal>Disco magnético"
+            "A": "Disco magnético<Memória principal<Cache<Registradores",
+            "B": "Registradores<Cache<Memória principal<Disco magnético",
+            "C": "Memória principal<Disco magnético<Cache<Regitradores",
+            "D": "Cache<Regitradores<Memória principal<Disco magnético"
         },
         "answer": "B"
     },
@@ -155,17 +155,6 @@
     },
     {
         "id": 15,
-        "question": "Quais afirmações estão corretas sobre os processos?",
-        "options": {
-            "A": "Um processo é apenas uma instância de um programa em execução",
-            "B": "Cada processo tem seu próprio espaço de endereçamento.",
-            "C": "Um processo contém: contador do programa e registradores",
-            "D": "Todas as afirmações estão corretas"
-        },
-        "answer": "D"
-    },
-    {
-        "id": 15,
         "question": "Qual afirmação está incorreta sobre os processos?",
         "options": {
             "A": "Um processo é apenas uma instância de um programa em execução",
@@ -234,7 +223,7 @@
         "id": 21,
         "question": "Qual das afirmações está correta quando se fala em evitar as condições de corrida?",
         "options": {
-            "A": "Proibir mais de um processo de ler e escrever os dados compartilhados",
+            "A": "Proibir mais de um processo de ler ou escrever os dados compartilhados",
             "B": "Em um sistemas com múltiplas CPUs, impedir que o sistema operacional escalone um dos processos",
             "C": "Exercer a exclusão mútua, quando um processo está usando um arquivo ou variável compartilhados, os outros serão impedidos de realizar a mesma coisa.",
             "D": "É impossível evitar condições de corrida"
@@ -309,7 +298,7 @@
     },
     {
         "id": 28,
-        "question": "Uma forma de lidar com a sobrecarga a movimentação dos processos que não cabem mais em sua memória alocada",
+        "question": "Uma forma de lidar com a sobrecarga na movimentação dos processos, que não cabem mais em sua memória alocada, seria:",
         "options": {
             "A": "Alocar um pouco de memória extra sempre que um processo for trocado ou movido",
             "B": "Reservar exatamente o que é necessário, nem mais nem menos, assim reduz a sobrecarga causada por alocações extras",

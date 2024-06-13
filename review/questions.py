@@ -20,7 +20,7 @@ for i in questions:
     else:
         print("Incorreta")
     n = i['id']
-    bar = f"{n}/{31} {chr(9608) * n}"
+    bar = f"{n}/{31} {chr(9608) * int(n * (tamanho - 6)/31)}"
     print(f"Total de corretas: {corretas}")
     print(bar)
     print(tamanho * "-")
