@@ -30,7 +30,7 @@ self-contained: true
 
 \
 
-O sistema operacional opera em [modo núcleo]{.blue} (também chamado modo supervisor). Nesse modo, [ele tem acesso completo a todo o hardware e *pode executar qualquer instrução]{.marked} que a máquina for capaz de executar.*
+O sistema operacional opera em [modo núcleo]{.blue} (também chamado modo supervisor). Nesse modo, [ele tem acesso completo a todo o hardware e pode executar qualquer instrução]{.marked} que a máquina for capaz de executar.
 :::
 ::: {.column width="60%"}
 
@@ -215,7 +215,7 @@ O resultado é um uso eficiente das operações no cache, [mantendo os dados nas
 
 ## O zoológico dos sistemas operacionais
 
-- Sistemas operacionais de computadores de grande porte, [de alto desempenho e alta disponibilidade]{.marked} (*mainframes*)
+- Sistemas operacionais de computadores de grande porte, [de alto desempenho e alta disponibilidade]{.marked} [(*mainframes*)](https://www.youtube.com/watch?v=HiQOBAEfZmQ&t=119s)
 - Sistemas operacionais de servidores
 - Sistemas operacionais de computadores pessoais
 - Sistemas operacionais de computadores portáteis
