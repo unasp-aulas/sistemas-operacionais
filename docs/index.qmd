@@ -15,6 +15,7 @@ format:
 html-math-method: mathjax
 code-annotations: below
 self-contained: true
+lightbox: true
 ---
 
 # Fundamentos de Sistemas Operacionais
@@ -150,7 +151,7 @@ A CPU, memória e dispositivos de E/S estão todos conectados por um [sistema de
 
 ::: {.columns}
 ::: {.column width=60%}
-![Baseado em <https://materialpublic.imd.ufrn.br/curso/disciplina>](images/ciclo-da-cpu-01.png){width="120%"}
+![Baseado em <https://materialpublic.imd.ufrn.br/curso/disciplina>](images/ciclo-da-cpu-01.svg){width="120%"}
 :::
 ::: {.column width=40%}
 [Endereçamento da próxima instrução a ser executada:]{.blue} A instrução é endereçada através do envio do conteúdo do Contador de Programa (PC), que está localizado na Unidade de Controle (UC), para a memória de instruções. Esse conteúdo representa o endereço da próxima instrução a ser executada. 
@@ -163,7 +164,7 @@ A CPU, memória e dispositivos de E/S estão todos conectados por um [sistema de
 
 ::: {.columns}
 ::: {.column width=60%}
-![Baseado em <https://materialpublic.imd.ufrn.br/curso/disciplina>](images/ciclo-da-cpu-02.png){width="120%"}
+![Baseado em <https://materialpublic.imd.ufrn.br/curso/disciplina>](images/ciclo-da-cpu-02.svg){width="120%"}
 :::
 ::: {.column width=40%}
 [Leitura da instrução da memória de instruções:]{.blue} a memória faz a leitura de uma palavra de instrução.
@@ -176,7 +177,7 @@ A CPU, memória e dispositivos de E/S estão todos conectados por um [sistema de
 
 ::: {.columns}
 ::: {.column width=60%}
-![Baseado em <https://materialpublic.imd.ufrn.br/curso/disciplina>](images/ciclo-da-cpu-03.png){width="120%"}
+![Baseado em <https://materialpublic.imd.ufrn.br/curso/disciplina>](images/ciclo-da-cpu-03.svg){width="120%"}
 :::
 ::: {.column width=40%}
 [Escrita da instrução no registrador de instruções:]{.blue} a instrução lida é escrita dentro do processador no registrador de instruções. No nosso exemplo, o valor da instrução lida é 1B
@@ -189,7 +190,7 @@ A CPU, memória e dispositivos de E/S estão todos conectados por um [sistema de
 
 ::: {.columns}
 ::: {.column width=60%}
-![Baseado em <https://materialpublic.imd.ufrn.br/curso/disciplina>](images/ciclo-da-cpu-04.png){width="110%"}
+![Baseado em <https://materialpublic.imd.ufrn.br/curso/disciplina>](images/ciclo-da-cpu-04.svg){width="110%"}
 :::
 ::: {.column width=40%}
 [Decodificação dos operandos:]{.blue} a instrução é decodificada, ou seja, o processador passa a conhecer qual é a instrução (que operação ela executa) e quais são os operandos.
@@ -206,7 +207,7 @@ O decodificador é um componente de hardware fundamental sendo [responsável por
 
 ::: {.columns}
 ::: {.column width=60%}
-![Baseado em <https://materialpublic.imd.ufrn.br/curso/disciplina>](images/ciclo-da-cpu-05.png){width="120%"}
+![Baseado em <https://materialpublic.imd.ufrn.br/curso/disciplina>](images/ciclo-da-cpu-05.svg){width="120%"}
 :::
 ::: {.column width=40%}
 [Leitura dos operandos da memória ou dos registradores:]{.blue} os operandos fonte (dados que serão utilizados para efetuar a operação na ULA) são lidos da memória ou dos registradores e colocados nas entradas da ULA.
@@ -219,7 +220,7 @@ O decodificador é um componente de hardware fundamental sendo [responsável por
 
 ::: {.columns}
 ::: {.column width=60%}
-![Baseado em <https://materialpublic.imd.ufrn.br/curso/disciplina>](images/ciclo-da-cpu-06.png){width="120%"}
+![Baseado em <https://materialpublic.imd.ufrn.br/curso/disciplina>](images/ciclo-da-cpu-06.svg){width="120%"}
 :::
 ::: {.column width=40%}
 [Execução da instrução:]{.blue} quando a ULA recebe os operandos fonte, então o próximo passo será a execução da operação através da ULA.
@@ -232,7 +233,7 @@ O decodificador é um componente de hardware fundamental sendo [responsável por
 
 ::: {.columns}
 ::: {.column width=60%}
-![Baseado em <https://materialpublic.imd.ufrn.br/curso/disciplina>](images/ciclo-da-cpu-07.png){width="120%"}
+![Baseado em <https://materialpublic.imd.ufrn.br/curso/disciplina>](images/ciclo-da-cpu-07.svg){width="120%"}
 :::
 ::: {.column width=40%}
 [Escrita do resultado:]{.blue} a saída da ULA, que contém o resultado da operação que acabou de ser executada, é escrita no operando destino, que pode estar em algum registrador ou na memória.
