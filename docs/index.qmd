@@ -2665,15 +2665,24 @@ Infelizmente para os fabricantes de hardware de dispositivos, cada tipo de siste
 
 # GNU/Linux
 
-## O Incidente da Impressora Xerox
+## Incidente da Impressora Xerox {background-image="images/richard-stallman.jpg" background-position="250% 50%" background-size="80%" .smaller}
 
-- [O Cenário:]{.blue} No final da década de 70, no laboratório de IA do MIT, Stallman deparou-se com atolamentos de papel constantes na nova impressora a laser doada pela Xerox
+
+::: {.columns}
+
+::: {.column width=47%}
+- [O Cenário:]{.blue} No final da década de 70, no laboratório de IA do MIT, [Stallman]{.marked} deparou-se com atolamentos de papel constantes na nova impressora a laser doada pela Xerox
 - [O Impedimento:]{.blue} Ele desejava modificar o software da impressora para enviar alertas de erro aos usuários, mas descobriu que a Xerox fornecia o software apenas em formato binário legível por máquinas, escondendo o código-fonte
 - [O Conflito:]{.blue} Stallman buscou o código com um colega pesquisador, que recusou o compartilhamento alegando ter assinado um Acordo de Não Divulgação (NDA) com a Xerox
 - [A Lição:]{.blue} Essa experiência ensinou a Stallman que os NDAs tinham vítimas e que o software proprietário sabotava a cooperação comunitária ao isolar os programadores
 - [A Decisão:]{.blue} Esse dilema moral foi o catalisador para Stallman decidir que nunca faria outras pessoas vítimas desse sistema, motivando-o a criar o GNU para garantir a liberdade dos usuários
+:::
+::: {.column width=53%}
+:::
+:::
 
-## O Projeto GNU — Origem e Filosofia
+
+## Projeto GNU — Origem e Filosofia
 - [Lançamento:]{.blue} Richard Stallman anunciou o projeto em setembro de 1983 para criar um sistema operacional compatível com Unix que fosse inteiramente software livre
 - [Significado:]{.blue} O nome é um acrônimo recursivo para ["GNU's Not Unix"]{.marked}
 - [O Manifesto GNU (1985):]{.blue} Estabeleceu a base ideológica do movimento, defendendo que o compartilhamento de software é um ato fundamental de amizade e solidariedade entre programadores
@@ -2685,19 +2694,29 @@ Infelizmente para os fabricantes de hardware de dispositivos, cada tipo de siste
 3. Redistribuir cópias para ajudar o próximo
 4. Distribuir versões modificadas para beneficiar a comunidade
 
-## O Sistema GNU e a Lacuna do Kernel
+## Sistema GNU e a Lacuna do Kernel
 - [Construção do Sistema:]{.blue} Durante a década de 80, o projeto desenvolveu componentes cruciais como o editor Emacs, o compilador GCC e o depurador GDB
 - [A Estratégia:]{.blue} Para evitar o controle por terceiros, Stallman criou a GNU General Public License (GPL), usando a lei de direitos autorais para garantir a liberdade contínua do software (Copyleft)
 - [O Kernel Hurd:]{.blue} O projeto iniciou seu próprio núcleo, o Hurd, em 1990, mas seu design ambicioso de microkernel resultou em um desenvolvimento muito lento
 - [Estado em 1991:]{.blue} O sistema GNU estava quase completo, possuindo quase todas as ferramentas necessárias, exceto um núcleo funcional para gerenciar o hardware
 
-## O Kernel Linux — Um Hobby que Cresceu
-- [Origem:]{.blue} Anunciado por Linus Torvalds, um estudante finlandês, em agosto de 1991 na Usenet como um projeto pessoal
+## Kernel Linux {background-image="images/linus-torvalds.webp" background-position="105% 50%" background-size="40%"}
+#### Um Hobby que Cresceu
+::: {.columns}
+::: {.column width=65%}
+- [Origem:]{.blue} Anunciado por [Linus Torvalds]{.marked}, um estudante finlandês, em agosto de 1991 na Usenet como um projeto pessoal
 - [Contexto:]{.blue} Foi desenvolvido inicialmente para computadores com processador Intel 386 por ser uma arquitetura que Torvalds possuía e queria explorar
 - [Motivação:]{.blue} Surgiu da insatisfação com o sistema MINIX, que era limitado e cujas modificações não eram permitidas livremente pelo seu criador, Andrew Tanenbaum
 - [Integração Inicial:]{.blue} Já em sua versão 0.02, o Linux era capaz de rodar ferramentas essenciais do projeto GNU, como o interpretador bash e o compilador gcc
 
-## A União de Forças — GNU/Linux
+:::
+::: {.column width=35%}
+
+:::
+:::
+
+
+## União de Forças — GNU/Linux
 - [O Encontro:]{.blue} O kernel Linux preencheu a última lacuna que faltava no sistema operacional GNU, unindo as ferramentas de usuário de Stallman ao núcleo de Torvalds
 - [Identidade do Sistema:]{.blue} O que muitos chamam apenas de "Linux" é, na verdade, uma combinação do sistema GNU com o kernel Linux
 - [Controvérsia do Nome:]{.blue} A Free Software Foundation defende o termo "GNU/Linux" para dar crédito ao projeto que construiu a maior parte do sistema e promover a filosofia da liberdade
