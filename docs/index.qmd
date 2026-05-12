@@ -2715,6 +2715,27 @@ Infelizmente para os fabricantes de hardware de dispositivos, cada tipo de siste
 :::
 :::
 
+## Kernel Linux
+
+\
+
+```
+De: torvalds@klaava.Helsinki.FI (Linus Benedict Torvalds)
+Grupos de discussão: comp.os.minix
+Assunto: O que você mais gostaria de ver no Minix?
+
+Resumo: pequena pesquisa para meu novo sistema operacional
+ID da mensagem: <1991Aug25.205708.9541@klaava.Helsinki.FI>
+Data: 25 de agosto de 1991, 20:57:08 GMT
+Organização: Universidade de Helsinque
+Olá a todos que usam Minix –
+
+Estou desenvolvendo um sistema operacional (gratuito) (apenas um hobby, não será grande e profissional como o GNU) para clones de 386 (486) AT. Este projeto está em desenvolvimento desde abril e está começando a ficar pronto. Gostaria de receber feedback sobre o que as pessoas gostam/não gostam no Minix, já que meu sistema operacional se assemelha um pouco a ele (mesmo layout físico do sistema de arquivos (por razões práticas), entre outras coisas). Atualmente, portei o bash (1.08) e o gcc (1.40) e tudo parece funcionar. Isso implica que terei algo prático em alguns meses e gostaria de saber quais recursos a maioria das pessoas gostaria. Qualquer sugestão é bem-vinda, mas não prometo implementá-las :-)
+
+Linus (torvalds@kruuna.helsinki.fi)
+
+PS: Sim, ele é livre de qualquer código Minix e possui um sistema de arquivos multithread. Ele NÃO é portável (usa troca de tarefas do 386 etc.) e provavelmente nunca suportará nada além de discos rígidos AT, pois são os únicos que tenho :-(.
+```
 
 ## União de Forças — GNU/Linux
 - [O Encontro:]{.blue} O kernel Linux preencheu a última lacuna que faltava no sistema operacional GNU, unindo as ferramentas de usuário de Stallman ao núcleo de Torvalds
